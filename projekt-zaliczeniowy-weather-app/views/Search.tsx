@@ -19,7 +19,6 @@ export const Search: FC = () => {
                 (result) => {
                     setLoading(false);
                     setData(result);
-                    console.log(data!.data[0].city)
                 },
                 (error) => {
                     setLoading(false);
@@ -44,7 +43,7 @@ export const Search: FC = () => {
             <View style={styles.text}>
                 <>
                     {loading && <Text>Loading..</Text>}
-                    {!loading && data!.data.forEach((city, i) => { 
+                    {!loading && data?.data.map((city, i) => { 
                         return i<100 && <Text>{city.city}</Text>
                     })}
                 </>
@@ -94,7 +93,8 @@ const styles = StyleSheet.create({
         padding: 15,
         borderWidth: 2,
         borderColor: colors.columbiaBlue,
-        borderRadius: 5
+        borderRadius: 5,
+        color: '#fff'
     }
 
 });
