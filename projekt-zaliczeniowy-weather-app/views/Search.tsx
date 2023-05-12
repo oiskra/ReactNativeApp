@@ -18,7 +18,8 @@ export const Search: FC = () => {
             .then(
                 (result) => {
                     setLoading(false);
-                    setData(result.data);
+                    setData(result);
+                    console.log(data!.data[0].city)
                 },
                 (error) => {
                     setLoading(false);
@@ -39,8 +40,14 @@ export const Search: FC = () => {
                 />
                 <Image style={styles.searchIcon} source={require('../assets/favicon.png')} />
             </View>
+
             <View style={styles.text}>
-                
+                <>
+                    {loading && <Text>Loading..</Text>}
+                    {!loading && data!.data.forEach((city, i) => { 
+                        return i<100 && <Text>{city.city}</Text>
+                    })}
+                </>
             </View>
         </View>
     );
@@ -51,8 +58,7 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        backgroundColor: colors.oxfordBlue,
-        color: colors.columbiaBlue,
+        backgroundColor: colors.jordyBlue,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -88,7 +94,7 @@ const styles = StyleSheet.create({
         padding: 15,
         borderWidth: 2,
         borderColor: colors.columbiaBlue,
-        borderRadius: 5,
+        borderRadius: 5
     }
 
 });

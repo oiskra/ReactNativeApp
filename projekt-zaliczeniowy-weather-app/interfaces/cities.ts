@@ -5,14 +5,15 @@ export interface Cities {
         {
             city: string;
             country: string;
-            populationCounts: [
+            populationCounts: Array<
                 {
                     year: string;
                     value: string;
                     sex: string;
                     rehability: string;
                 }
-            ]
+            >
+            
         }
     ]
 }
