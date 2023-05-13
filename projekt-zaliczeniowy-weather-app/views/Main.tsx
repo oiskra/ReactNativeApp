@@ -15,7 +15,7 @@ export const Main : FC = () => {
                     marginVertical: 10
                 }}>
                     <Image style={mainStyles.img}  source={require("../assets/umbrella.png")}></Image>
-                    <Text style={mainStyles.header}>Weather App</Text>
+                    <Text style={mainStyles.mainHeader}>WeatherNow</Text>
                 </View>
                 <CustomButton title="Check Weather"/>
                 <CustomButton title="Favourites"/>
@@ -35,7 +35,7 @@ const mainStyles = StyleSheet.create({
         paddingHorizontal:20,
         backgroundColor: colors.columbiaBlue,
     },
-    header: {
+    mainHeader: {
         textAlign: 'center', 
         fontSize: 30,
         fontWeight: 'bold'
