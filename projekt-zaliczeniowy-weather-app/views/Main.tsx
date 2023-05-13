@@ -2,9 +2,13 @@ import { FC } from "react";
 import { View, Text, Image, StyleSheet, SafeAreaView } from "react-native";
 import { colors } from "../constants";
 import { CustomButton } from "../components/CustomButton";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../App";
 
 
-export const Main : FC = () => {
+type MainProps = NativeStackScreenProps<RootStackParamList, 'Main'>
+
+export const Main : FC<MainProps> = ({ navigation }) => {
 
     return (
         <SafeAreaView style={{flex:1}}> 
@@ -19,7 +23,7 @@ export const Main : FC = () => {
                 </View>
                 <CustomButton title="Check Weather"/>
                 <CustomButton title="Favourites"/>
-                <CustomButton title="About"/>
+                <CustomButton title="About" onPress={() => navigation.push('About')}/>
                 <CustomButton title="Settings"/>
             </View>
         </SafeAreaView>

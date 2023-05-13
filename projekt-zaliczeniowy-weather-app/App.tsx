@@ -1,20 +1,48 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { Main } from './views/Main';
+import { About } from './views/About';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { colors } from './constants';
+
+export type RootStackParamList = {
+  Main: undefined;
+  About: undefined;
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Hello World!</Text>
-      <StatusBar style="auto" />
-    </View>
+      <NavigationContainer>
+        <Stack.Navigator 
+          screenOptions={{
+            headerTransparent: true,
+          }}
+        >
+          <Stack.Screen 
+            name="Main"
+            component={Main}
+          />
+          {/* <Stack.Screen 
+            name='Search'
+            component={Search}
+          /> */}
+          <Stack.Screen 
+            name='About'
+            component={About}
+          />
+          {/* <Stack.Screen 
+            name='Settings'
+            component={Settings}
+          /> */}
+        </Stack.Navigator>
+      </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  headerStyle: {
+    backgroundColor: colors.oxfordBlue,
+  }
 });
