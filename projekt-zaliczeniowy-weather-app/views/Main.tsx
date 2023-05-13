@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { View,Text, Button, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, SafeAreaView } from "react-native";
 import { colors } from "../constants";
 import { CustomButton } from "../components/CustomButton";
 
@@ -7,20 +7,22 @@ import { CustomButton } from "../components/CustomButton";
 export const Main : FC = () => {
 
     return (
-        <View style={mainStyles.mainContainer}>
-            <View style={{
-                justifyContent: 'center', 
-                alignItems: 'center',
-                marginVertical: 10
-            }}>
-                <Image style={mainStyles.img}  source={require("../assets/umbrella.png")}></Image>
-                <Text style={mainStyles.header}>Weather App</Text>
+        <SafeAreaView style={{flex:1}}> 
+            <View style={mainStyles.mainContainer}>
+                <View style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginVertical: 10
+                }}>
+                    <Image style={mainStyles.img}  source={require("../assets/umbrella.png")}></Image>
+                    <Text style={mainStyles.header}>Weather App</Text>
+                </View>
+                <CustomButton title="Check Weather"/>
+                <CustomButton title="Favourites"/>
+                <CustomButton title="About"/>
+                <CustomButton title="Settings"/>
             </View>
-            <CustomButton title="Search"/>
-            <CustomButton title="Favourites"/>
-            <CustomButton title="About"/>
-            <CustomButton title="Settings"/>
-        </View>
+        </SafeAreaView>
     );
 }
 
@@ -31,7 +33,7 @@ const mainStyles = StyleSheet.create({
         justifyContent: 'center',
         gap: 15,
         paddingHorizontal:20,
-        backgroundColor: colors.columbiaBlue
+        backgroundColor: colors.columbiaBlue,
     },
     header: {
         textAlign: 'center', 
