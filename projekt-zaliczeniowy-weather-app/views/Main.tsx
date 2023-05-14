@@ -2,12 +2,16 @@ import { FC } from "react";
 import { View, Text, Image, StyleSheet, SafeAreaView } from "react-native";
 import { colors } from "../constants";
 import { CustomButton } from "../components/CustomButton";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../App";
 
 
-export const Main : FC = () => {
+type MainProps = NativeStackScreenProps<RootStackParamList, 'Main'>
+
+export const Main : FC<MainProps> = ({ navigation }) => {
 
     return (
-        <SafeAreaView style={{flex:1}}> 
+        <SafeAreaView style={{flex:1}}>
             <View style={mainStyles.mainContainer}>
                 <View style={{
                     justifyContent: 'center',
@@ -17,9 +21,9 @@ export const Main : FC = () => {
                     <Image style={mainStyles.img}  source={require("../assets/umbrella.png")}></Image>
                     <Text style={mainStyles.mainHeader}>WeatherNow</Text>
                 </View>
-                <CustomButton title="Check Weather"/>
+                <CustomButton title="Check Weather" onPress={() => navigation.push('Search')}/>
                 <CustomButton title="Favourites"/>
-                <CustomButton title="About"/>
+                <CustomButton title="About" onPress={() => navigation.push('About')}/>
                 <CustomButton title="Settings"/>
             </View>
         </SafeAreaView>
@@ -36,7 +40,7 @@ const mainStyles = StyleSheet.create({
         backgroundColor: colors.columbiaBlue,
     },
     mainHeader: {
-        textAlign: 'center', 
+        textAlign: 'center',
         fontSize: 30,
         fontWeight: 'bold'
     },
@@ -44,7 +48,5 @@ const mainStyles = StyleSheet.create({
         width:100,
         height:100
     }
-
-    
 
 });
