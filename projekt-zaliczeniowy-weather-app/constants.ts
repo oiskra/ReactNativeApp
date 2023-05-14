@@ -1,3 +1,5 @@
+import { StyleSheet } from "react-native";
+
 export const colors = {
     oxfordBlue: '#0b132bff',
     celticBlue: '#4472caff',

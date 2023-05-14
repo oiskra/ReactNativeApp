@@ -42,7 +42,7 @@ const mainStyles = StyleSheet.create({
     mainHeader: {
         textAlign: 'center',
         fontSize: 30,
-        fontWeight: 'bold'
+        fontFamily: 'DMSansBold'
     },
     img: {
         width:100,

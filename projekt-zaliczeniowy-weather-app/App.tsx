@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { colors } from './constants';
 import { Search } from './views/Search';
+import { useFonts } from 'expo-font';
 
 export type RootStackParamList = {
   Main: undefined;
@@ -16,11 +17,28 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
 
+  const [fontsLoaded] = useFonts({
+    'DMSansBold': require('./assets/fonts/DMSans-Bold.ttf'),
+    'DMSansMedium': require('./assets/fonts/DMSans-Medium.ttf'),
+    'DMSans': require('./assets/fonts/DMSans-Regular.ttf'),
+  });
+
+  // const onLayoutRootView = useCallback(async () => {
+  //   if (fontsLoaded) {
+  //     await SplashScreen.hideAsync();
+  //   }
+  // }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{
             headerTransparent: true,
+            headerTitleStyle: {fontFamily: 'DMSansBold'},
           }}
         >
           <Stack.Screen

@@ -36,7 +36,7 @@ export const Search: FC = () => {
         <View style={styles.container}>
             <View style={styles.searchBar}>
                 <TextInput
-                    style={styles.textInput}
+                    style={[styles.textInput, {fontFamily: 'DMSans'}]}
                     value={input}
                     placeholder='Enter city...'
                     onChangeText={setInput}
@@ -54,7 +54,7 @@ export const Search: FC = () => {
             </View>
 
             <View style={styles.text}>
-                <Text>Historia miast</Text>
+                <Text style={{fontFamily: 'DMSans'}}>Historia miast</Text>
             </View>
         </View>
     );
@@ -107,7 +107,8 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: colors.jordyBlue,
         borderRadius: 5,
-        color: colors.white
+        color: colors.white,
+        fontFamily: 'DMSans'
     }
 
 });

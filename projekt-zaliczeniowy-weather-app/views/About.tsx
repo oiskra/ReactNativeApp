@@ -9,9 +9,9 @@ export const About : FC = () => {
         <Text style={aboutStyles.aboutParagraph}>
             WeatherNow is your go-to weather app, providing accurate and reliable weather information right at your fingertips. 
         </Text>
-        <Text style={{fontWeight: 'bold'}}>Authors:</Text>
-        <Text style={{marginLeft: 3}}>Olaf Iskra</Text>
-        <Text style={{marginLeft: 3}}>Marek Porębski</Text>
+        <Text style={{fontFamily: 'DMSansMedium'}}>Authors:</Text>
+        <Text style={{marginLeft: 3, fontFamily: 'DMSans'}}>Olaf Iskra</Text>
+        <Text style={{marginLeft: 3, fontFamily: 'DMSans'}}>Marek Porębski</Text>
     </View>
   );
 }
@@ -20,16 +20,17 @@ export const About : FC = () => {
 const aboutStyles = StyleSheet.create({
     aboutHeader: {
         fontSize: 30,
-        fontWeight: 'bold'
+        fontFamily: 'DMSansBold'
     },
     aboutParagraph: {
-        marginBottom:10
+        marginBottom:10,
+        fontFamily: 'DMSans'
     },
     aboutContainer: {
-        flex: 1, 
+        flex: 1,
         justifyContent:'center',
         paddingHorizontal: 20,
-        backgroundColor: colors.columbiaBlue 
+        backgroundColor: colors.columbiaBlue
     }
 
 })

@@ -11,7 +11,7 @@ export const ListItem : FC<IListItemProps> = ({listItemText}) => {
 
     return (
         <View style={styles.listItem}>
-            <Text onPress={()=> console.log(listItemText)}>{listItemText}</Text>
+            <Text style={{fontFamily: 'DMSans'}} onPress={()=> console.log(listItemText)}>{listItemText}</Text>
         </View>
     );
 }
