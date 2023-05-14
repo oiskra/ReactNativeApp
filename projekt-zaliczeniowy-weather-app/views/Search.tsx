@@ -30,6 +30,7 @@ export const Search: FC = () => {
 
 
     const onPress = () => console.log(`Search ${input}`);
+    console.log(`'${input}'`);
 
     return (
         <View style={styles.container}>
@@ -53,12 +54,7 @@ export const Search: FC = () => {
             </View>
 
             <View style={styles.text}>
-                {/* <>
-                    {loading && <Text>Loading..</Text>}
-                    {!loading && data?.data.map((city, i) => {
-                        return i < 100 && <ListItem listItemText={city.city} />
-                    })}
-                </> */}
+                <Text>Historia miast</Text>
             </View>
         </View>
     );

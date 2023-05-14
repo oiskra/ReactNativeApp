@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { StyleSheet, Platform, ScrollView } from 'react-native';
+import React, { FC, useState } from 'react';
+import { StyleSheet, Platform, ScrollView, View, FlatList } from 'react-native';
 import { colors } from '../constants';
 import { Cities } from '../interfaces/cities';
 import { ListItem } from './ListItem';
@@ -8,18 +8,27 @@ import { ListItem } from './ListItem';
 interface ISearchFilterProps {
     input: string;
     cities: Cities | undefined;
-    active: boolean;
+    active?: boolean;
 }
 
-export const SearchFilter: FC<ISearchFilterProps> = ({ input, cities, active = false, }) => {
+
+
+export const SearchFilter: FC<ISearchFilterProps> = ({ input, cities }) => {
+    const [active, setActive] = useState(false);
+
     return (
         <ScrollView
-            style={active ? styles.none : styles.flex}
+            style={styles.flex}
         >
-            {!active && cities?.data.map((city, i) => {
-                return i < 100 && <ListItem listItemText={city.city} />
+            {cities?.data.map((city) => {
+                if(input !== '' && city.city.toLocaleLowerCase().startsWith(input.toLocaleLowerCase())){
+                    return <ListItem listItemText={city.city} />
+                }else
+                    return
             })}
+
         </ScrollView>
+
     );
 };
 
@@ -30,17 +39,15 @@ const styles = StyleSheet.create({
     },
 
     flex: {
-        zIndex: 100,
-        elevation: (Platform.OS === 'android') ? 50 : 0,
         display: 'flex',
         position: 'absolute',
         width: '100%',
-        maxHeight: 100,
         top: 50,
         borderWidth: 2,
         borderColor: colors.jordyBlue,
         borderRadius: 5,
-        backgroundColor: colors.white
+        backgroundColor: colors.white,
     },
-});
 
+
+});

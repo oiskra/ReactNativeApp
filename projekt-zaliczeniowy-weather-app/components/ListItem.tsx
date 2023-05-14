@@ -21,6 +21,9 @@ const styles = StyleSheet.create({
 
     listItem: {
         zIndex: -1,
-        backgroundColor: colors.black,
+        color: colors.white,
+        backgroundColor: colors.columbiaBlue,
+        padding: 5,
     }
+
 });
