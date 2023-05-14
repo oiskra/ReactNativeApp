@@ -11,7 +11,7 @@ type MainProps = NativeStackScreenProps<RootStackParamList, 'Main'>
 export const Main : FC<MainProps> = ({ navigation }) => {
 
     return (
-        <SafeAreaView style={{flex:1}}> 
+        <SafeAreaView style={{flex:1}}>
             <View style={mainStyles.mainContainer}>
                 <View style={{
                     justifyContent: 'center',
@@ -21,7 +21,7 @@ export const Main : FC<MainProps> = ({ navigation }) => {
                     <Image style={mainStyles.img}  source={require("../assets/umbrella.png")}></Image>
                     <Text style={mainStyles.mainHeader}>WeatherNow</Text>
                 </View>
-                <CustomButton title="Check Weather"/>
+                <CustomButton title="Check Weather" onPress={() => navigation.push('Search')}/>
                 <CustomButton title="Favourites"/>
                 <CustomButton title="About" onPress={() => navigation.push('About')}/>
                 <CustomButton title="Settings" onPress={() => navigation.push('Settings')}/>
@@ -40,15 +40,13 @@ const mainStyles = StyleSheet.create({
         backgroundColor: colors.columbiaBlue,
     },
     mainHeader: {
-        textAlign: 'center', 
+        textAlign: 'center',
         fontSize: 30,
-        fontWeight: 'bold'
+        fontFamily: 'DMSansBold'
     },
     img: {
         width:100,
         height:100
     }
-
-    
 
 });
