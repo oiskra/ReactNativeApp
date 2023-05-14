@@ -1,10 +1,11 @@
 import React, { FC } from 'react'
-import { View } from 'react-native'
+import { CurrentWeather } from '../components/CurrentWeather'
+import { SafeAreaView } from 'react-native'
 
 export const WeatherInfo : FC = () => {
   return (
-    <View>
-
-    </View>
+    <SafeAreaView style={{flex:1}}>
+      <CurrentWeather city='Kraków' currentTemp='20°' description='CLOUDY'/>
+    </SafeAreaView>
   )
 }

@@ -4,10 +4,12 @@ import { About } from './views/About';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { colors } from './constants';
+import { WeatherInfo } from './views/WeatherInfo';
 
 export type RootStackParamList = {
   Main: undefined;
   About: undefined;
+  Settings: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -32,10 +34,10 @@ export default function App() {
             name='About'
             component={About}
           />
-          {/* <Stack.Screen 
+          <Stack.Screen 
             name='Settings'
-            component={Settings}
-          /> */}
+            component={WeatherInfo}
+          />
         </Stack.Navigator>
       </NavigationContainer>
   );

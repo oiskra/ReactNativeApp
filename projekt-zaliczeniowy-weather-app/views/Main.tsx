@@ -24,7 +24,7 @@ export const Main : FC<MainProps> = ({ navigation }) => {
                 <CustomButton title="Check Weather"/>
                 <CustomButton title="Favourites"/>
                 <CustomButton title="About" onPress={() => navigation.push('About')}/>
-                <CustomButton title="Settings"/>
+                <CustomButton title="Settings" onPress={() => navigation.push('Settings')}/>
             </View>
         </SafeAreaView>
     );
