@@ -1,14 +1,15 @@
 import { FC } from "react";
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Image } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity } from 'react-native';
 import { colors } from '../constants';
-import { ListItem } from "../components/ListItem";
 import { Cities } from '../interfaces/cities';
+import { ListItem } from "../components/ListItem";
+import { SearchFilter } from "../components/SearchFilter";
 
 export const Search: FC = () => {
 
-    const [text, setInput] = useState('');
-    const [data, setData] = useState<Cities|undefined>(undefined);
+    const [input, setInput] = useState('');
+    const [data, setData] = useState<Cities | undefined>(undefined);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
@@ -28,25 +29,36 @@ export const Search: FC = () => {
     }, []);
 
 
+    const onPress = () => console.log(`Search ${input}`);
+
     return (
         <View style={styles.container}>
             <View style={styles.searchBar}>
                 <TextInput
                     style={styles.textInput}
-                    value={text}
+                    value={input}
                     placeholder='Enter city...'
                     onChangeText={setInput}
                 />
-                <Image style={styles.searchIcon} source={require('../assets/favicon.png')} />
+                <TouchableOpacity
+                    style={styles.touchableOpacity}
+                    onPress={onPress}
+                >
+                    <Image
+                        style={styles.searchIcon}
+                        source={require('../assets/search.png')}
+                    />
+                </TouchableOpacity>
+                <SearchFilter input={input} cities={data} active={false} />
             </View>
 
             <View style={styles.text}>
-                <>
+                {/* <>
                     {loading && <Text>Loading..</Text>}
-                    {!loading && data?.data.map((city, i) => { 
-                        return i<100 && <Text>{city.city}</Text>
+                    {!loading && data?.data.map((city, i) => {
+                        return i < 100 && <ListItem listItemText={city.city} />
                     })}
-                </>
+                </> */}
             </View>
         </View>
     );
@@ -57,7 +69,7 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        backgroundColor: colors.jordyBlue,
+        backgroundColor: colors.columbiaBlue,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -66,7 +78,7 @@ const styles = StyleSheet.create({
         width: '90%',
         margin: 10,
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'column',
     },
 
     textInput: {
@@ -74,27 +86,32 @@ const styles = StyleSheet.create({
         height: 40,
         padding: 10,
         borderWidth: 2,
-        borderColor: colors.columbiaBlue,
+        borderColor: colors.jordyBlue,
         borderRadius: 5,
     },
 
-    searchIcon: {
+    touchableOpacity: {
         position: 'absolute',
-        right: 10,
-        top: 8,
-        width: 25,
-        height: 25,
+        right: 15,
+        top: 13,
     },
 
+    searchIcon: {
+        width: 15,
+        height: 15,
+    },
+
+
     text: {
+        zIndex: -1,
         width: '90%',
         height: '70%',
         margin: 10,
         padding: 15,
         borderWidth: 2,
-        borderColor: colors.columbiaBlue,
+        borderColor: colors.jordyBlue,
         borderRadius: 5,
-        color: '#fff'
+        color: colors.white
     }
 
 });
