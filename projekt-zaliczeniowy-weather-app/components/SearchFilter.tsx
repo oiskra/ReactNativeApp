@@ -22,7 +22,7 @@ export const SearchFilter: FC<ISearchFilterProps> = ({ input, cities }) => {
         >
             {cities?.data.map((city) => {
                 if(input !== '' && city.city.toLocaleLowerCase().startsWith(input.toLocaleLowerCase())){
-                    return <ListItem listItemText={city.city} />
+                    return <ListItem key={city.city} listItemText={city.city} />
                 }else
                     return
             })}
