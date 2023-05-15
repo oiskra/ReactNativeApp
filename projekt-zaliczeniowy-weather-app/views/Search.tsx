@@ -30,7 +30,23 @@ export const Search: FC = () => {
 
 
     const onPress = () => console.log(`Search ${input}`);
-    console.log(`'${input}'`);
+
+    const debounceOnChange = (value: any, delay = 1000) => {
+
+        const [debounceValue, setDebounceValue] = useState(value);
+
+        useEffect(() => {
+            const handler = setTimeout(() => {
+                setDebounceValue(value);
+            }, delay);
+
+            return () => {
+                clearTimeout(handler);
+            };
+        }, [value, delay]);
+
+        return debounceValue
+    }
 
     return (
         <View style={styles.container}>
@@ -50,7 +66,7 @@ export const Search: FC = () => {
                         source={require('../assets/search.png')}
                     />
                 </TouchableOpacity>
-                <SearchFilter input={input} cities={data} active={false} />
+                <SearchFilter input={debounceOnChange(input)} cities={data} active={false} />
             </View>
 
             <View style={styles.text}>
@@ -112,3 +128,7 @@ const styles = StyleSheet.create({
     }
 
 });
+
+function debounce(updateInput: (e: any) => void, arg1: number) {
+    throw new Error("Function not implemented.");
+}
