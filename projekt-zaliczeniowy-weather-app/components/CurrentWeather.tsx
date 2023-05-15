@@ -25,9 +25,20 @@ export const CurrentWeather : FC<ICurrentWeatherProps> = ({city, currentTemp, de
             </View>
             <View style={currentWeatherStyles.tempContainer}>
                 <Text style={currentWeatherStyles.temperature}>{currentTemp}</Text>
-                <Text style={currentWeatherStyles.description}>{description}</Text>
+                <Text style={currentWeatherStyles.description}>{description?.toUpperCase()}</Text>
             </View>
-            {/* <Image source={require(weatherIcon!)}></Image> */}
+            <View style={{flex: 1, alignItems: 'center'}}>
+                <Image
+                    source={{uri: `https://openweathermap.org/img/wn/${weatherIcon}@4x.png`}}
+                    resizeMethod='scale'
+                    style={{
+                        width: 250,
+                        height: 250,
+                        maxHeight: 200
+                    }}
+                />
+            </View>
+
         </View>
     )
 }
@@ -37,8 +48,7 @@ const currentWeatherStyles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         backgroundColor: colors.columbiaBlue,
-        paddingTop: 100
-
+        paddingTop: 100,
     },
     currentWeatherHeader: {
         flex: 1,
@@ -46,10 +56,11 @@ const currentWeatherStyles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         maxHeight: 50  ,
-        marginHorizontal: 20   
+        marginHorizontal: 20,
     },
     headerText: {
         fontSize: 40,
+        fontFamily: 'DMSans'   
     },
     headerFavouriteImage: {
         width: 35,
@@ -60,10 +71,12 @@ const currentWeatherStyles = StyleSheet.create({
         height: 40,
     },
     temperature: {
-        fontSize: 100
+        fontSize: 100,
+        fontFamily: 'DMSans'   
     },
     description: {
-        fontSize: 20
+        fontSize: 20,
+        fontFamily: 'DMSans'   
     },
     tempContainer: {
         flex: 1,
@@ -71,6 +84,7 @@ const currentWeatherStyles = StyleSheet.create({
         alignItems: 'baseline',
         justifyContent: 'flex-start',
         marginHorizontal: 20,
-        gap: 10
+        gap: 10,
+        maxHeight: 100
     }
 });
