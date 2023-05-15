@@ -31,7 +31,7 @@ export interface ICurrentWeather {
     cod: number;
 }
   
-export interface IWeather {
+interface IWeather {
     id: number;
     main: string;
     description: string;

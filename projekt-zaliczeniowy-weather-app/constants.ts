@@ -9,4 +9,5 @@ export const colors = {
     black: '#000'
 };
 
-export const apiKey = 'e90e0b5a70ccd873175190ae64d3431a';
+export const weatherApiKey = 'e90e0b5a70ccd873175190ae64d3431a';
+export const cityApiKey = '6D6Hla0Y0JWMqknMoDKX+w==Ln6sXyiwuRYxNFDe';
