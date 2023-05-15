@@ -1,13 +1,13 @@
 import React, { FC, useState } from 'react';
 import { StyleSheet, Platform, ScrollView, View, FlatList } from 'react-native';
 import { colors } from '../constants';
-import { Cities } from '../interfaces/cities';
+import { ICities } from '../interfaces/ICities';
 import { ListItem } from './ListItem';
 
 
 interface ISearchFilterProps {
     input: string;
-    cities: Cities | undefined;
+    cities: ICities | undefined;
     active?: boolean;
 }
 

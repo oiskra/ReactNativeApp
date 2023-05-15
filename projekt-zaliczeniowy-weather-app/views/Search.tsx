@@ -2,14 +2,14 @@ import { FC } from "react";
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity } from 'react-native';
 import { colors } from '../constants';
-import { Cities } from '../interfaces/cities';
+import { ICities } from '../interfaces/ICities';
 import { ListItem } from "../components/ListItem";
 import { SearchFilter } from "../components/SearchFilter";
 
 export const Search: FC = () => {
 
     const [input, setInput] = useState('');
-    const [data, setData] = useState<Cities | undefined>(undefined);
+    const [data, setData] = useState<ICities | undefined>(undefined);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
