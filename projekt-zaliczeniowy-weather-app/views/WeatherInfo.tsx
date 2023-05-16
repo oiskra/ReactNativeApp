@@ -5,16 +5,22 @@ import { colors, weatherApiKey } from '../constants'
 import { ICurrentWeather } from '../interfaces/ICurrentWeather'
 import { ForecastWeather } from '../components/ForecastWeather'
 import { IHourlyWeather } from '../interfaces/IHourlyWeather'
+import { RootStackParamList } from '../App'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
 
-export const WeatherInfo : FC = () => {
+type WeatherInfoProps = NativeStackScreenProps<RootStackParamList, 'WeatherInfo'>
+
+export const WeatherInfo : FC<WeatherInfoProps> = ({route}) => {
   const [currentWeatherData, setCurrentWeatherData] = useState<ICurrentWeather | undefined>(undefined);
   const [hourlyWeatherData, setHourlyWeatherData] = useState<IHourlyWeather | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const city = route.params.city
   
   useEffect(() => {
     Promise.all([
-      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${'Kraków'}&units=metric&appid=${weatherApiKey}`),
-      fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${'Kraków'}&units=metric&appid=${weatherApiKey}`)
+      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${weatherApiKey}`),
+      fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${weatherApiKey}`)
     ])
     .then(([currentWeatherJson, hourlyWeatherJson]) => {
       return Promise.all([

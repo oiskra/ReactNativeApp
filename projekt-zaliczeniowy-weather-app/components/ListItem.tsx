@@ -5,13 +5,14 @@ import { colors } from '../constants';
 
 interface IListItemProps {
     listItemText: string;
+    onListItemPress: () => void;
 }
 
-export const ListItem : FC<IListItemProps> = ({listItemText}) => {
+export const ListItem : FC<IListItemProps> = ({listItemText, onListItemPress}) => {
 
     return (
         <View style={styles.listItem}>
-            <Text style={{fontFamily: 'DMSans'}} onPress={()=> console.log(listItemText)}>{listItemText}</Text>
+            <Text style={{fontFamily: 'DMSans'}} onPress={()=> onListItemPress()}>{listItemText}</Text>
         </View>
     );
 }

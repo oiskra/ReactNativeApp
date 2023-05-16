@@ -9,11 +9,12 @@ interface ISearchFilterProps {
     input: string;
     cities: ICities | undefined;
     active?: boolean;
+    selectedCityHandler: (city: string) => void
 }
 
 
 
-export const SearchFilter: FC<ISearchFilterProps> = ({ input, cities }) => {
+export const SearchFilter: FC<ISearchFilterProps> = ({ input, cities, selectedCityHandler }) => {
     const [active, setActive] = useState(false);
 
     useEffect(() => {
@@ -23,19 +24,20 @@ export const SearchFilter: FC<ISearchFilterProps> = ({ input, cities }) => {
 
     return (
         <>
-            {active
-                &&
-                <View style={!active ? styles.none : styles.flex}>
-                    <ScrollView style={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
-                        {cities?.data.map((city) => {
-                            if (input !== '' && city.city.toLocaleLowerCase().startsWith(input.toLocaleLowerCase())) {
-                                return <ListItem key={city.city} listItemText={city.city} />
-                            }
-                            return
-                        })}
+            {
+            active 
+            &&
+            <View style={!active ? styles.none : styles.flex}>
+                <ScrollView style={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
+                    {cities?.data.map((city) => {
+                        if (input !== '' && city.city.toLocaleLowerCase().startsWith(input.toLocaleLowerCase())) {
+                            return <ListItem key={city.city} listItemText={city.city} onListItemPress={() => selectedCityHandler(city.city)}/>
+                        }
+                        return
+                    })}
 
-                    </ScrollView>
-                </View>
+                </ScrollView>
+            </View>
             }
         </>
     );

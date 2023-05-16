@@ -13,6 +13,7 @@ export type RootStackParamList = {
   About: undefined;
   Settings: undefined;
   Search: undefined;
+  WeatherInfo: {city: string};
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -55,10 +56,14 @@ export default function App() {
             name='About'
             component={About}
           />
-          <Stack.Screen 
+          {/* <Stack.Screen 
             name='Settings'
             component={WeatherInfo}
-          />
+          /> */}
+          <Stack.Screen 
+            name='WeatherInfo'
+            component={WeatherInfo}
+            />
         </Stack.Navigator>
       </NavigationContainer>
   );

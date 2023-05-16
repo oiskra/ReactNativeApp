@@ -5,13 +5,17 @@ import { colors } from '../constants';
 import { ICities } from '../interfaces/ICities';
 import { ListItem } from "../components/ListItem";
 import { SearchFilter } from "../components/SearchFilter";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../App";
 
-export const Search: FC = () => {
+type SearchProps = NativeStackScreenProps<RootStackParamList, 'Search'>
+
+export const Search: FC<SearchProps> = ({navigation}) => {
 
     const [input, setInput] = useState('');
+    const [selectedCity, setSelectedCity] = useState('Kraków');
     const [data, setData] = useState<ICities | undefined>(undefined);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState('');
 
     useEffect(() => {
         fetch(`https://countriesnow.space/api/v0.1/countries/population/cities`)
@@ -23,13 +27,17 @@ export const Search: FC = () => {
                 },
                 (error) => {
                     setLoading(false);
-                    setError(error);
                 }
             )
     }, []);
 
+    console.log(selectedCity);
 
-    const onPress = () => console.log(`Search ${input}`);
+    const selectedCityHandler = (city: string) : void => {
+        setSelectedCity(city);
+        setInput(city);
+    }
+    const onSearchPress = () => navigation.push('WeatherInfo', {city: selectedCity})
 
     const debounceOnChange = (value: any, delay = 500) => {
 
@@ -57,14 +65,19 @@ export const Search: FC = () => {
                     placeholder='Enter city...'
                     onChangeText={setInput}
                 />
-                <TouchableOpacity onPress={onPress}>
+                <TouchableOpacity onPress={onSearchPress}>
                     <Image
                         style={styles.searchIcon}
                         source={require('../assets/search.png')}
                     />
                 </TouchableOpacity>
             </View>
-            <SearchFilter input={debounceOnChange(input)} cities={data} active={false} />
+            <SearchFilter 
+                input={debounceOnChange(input)} 
+                selectedCityHandler={selectedCityHandler}
+                cities={data} 
+                active={false} 
+            />
 
             <View style={styles.historyContainer}>
                 <Text style={{fontFamily: 'DMSans'}}>Historia miast</Text>
@@ -123,6 +136,3 @@ const styles = StyleSheet.create({
 
 });
 
-function debounce(updateInput: (e: any) => void, arg1: number) {
-    throw new Error("Function not implemented.");
-}
