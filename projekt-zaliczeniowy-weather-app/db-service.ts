@@ -1,3 +1,4 @@
+import { useCallback, useEffect, useState } from 'react';
 import { SQLiteDatabase, enablePromise, openDatabase } from 'react-native-sqlite-storage';
 
 enablePromise(true);
@@ -20,16 +21,16 @@ export const createTables = async (db: SQLiteDatabase) => {
 };
 
 
-interface Favourites {
+export interface ISavedCities {
   id: number;
   city: string;
 }
 
 
-export const getFavourites = async (db: SQLiteDatabase): Promise<Favourites[]> => {
+export const getFavourites = async (db: SQLiteDatabase): Promise<ISavedCities[]> => {
   try {
     const tableName = 'favourites';
-    const favouritesArr: Favourites[] = [];
+    const favouritesArr: ISavedCities[] = [];
     const results = await db.executeSql(`SELECT rowid as id,value FROM ${tableName}`);
     results.forEach(result => {
       for (let index = 0; index < result.rows.length; index++) {
@@ -42,8 +43,7 @@ export const getFavourites = async (db: SQLiteDatabase): Promise<Favourites[]> =
   }
 };
 
-
-export const addFavourite = async (db: SQLiteDatabase, favourites: Favourites[]) => {
+export const addFavourite = async (db: SQLiteDatabase, favourites: ISavedCities[]) => {
   const tableName = 'favourites';
   const insertQuery =
     `INSERT OR REPLACE INTO ${tableName}(rowid, value) values` +
@@ -60,16 +60,10 @@ export const delFavourite = async (db: SQLiteDatabase, id: number) => {
 };
 
 
-interface History {
-  id: number;
-  city: string;
-}
-
-
-export const getHistory = async (db: SQLiteDatabase): Promise<History[]> => {
+export const getHistory = async (db: SQLiteDatabase): Promise<ISavedCities[]> => {
   try {
     const tableName = 'history';
-    const hisotryArr: History[] = [];
+    const hisotryArr: ISavedCities[] = [];
     const results = await db.executeSql(`SELECT rowid as id,value FROM ${tableName}`);
     results.forEach(result => {
       for (let index = 0; index < result.rows.length; index++) {
@@ -82,8 +76,7 @@ export const getHistory = async (db: SQLiteDatabase): Promise<History[]> => {
   }
 };
 
-
-export const addHistory = async (db: SQLiteDatabase, history: History[]) => {
+export const addHistory = async (db: SQLiteDatabase, history: ISavedCities[]) => {
   const tableName = 'history';
   const insertQuery =
     `INSERT OR REPLACE INTO ${tableName}(rowid, value) values` +
@@ -98,3 +91,42 @@ export const delHistory = async (db: SQLiteDatabase, id: number) => {
   const deleteQuery = `DELETE from ${tableName} where rowid = ${id}`;
   await db.executeSql(deleteQuery);
 };
+
+
+const dbStart = () => {
+  const [favouritesArr, setFavourites] = useState<ISavedCities[]>();
+  const [historyArr, setHisotry] = useState<ISavedCities[]>();
+  const loadDataFromDb = () => useCallback(async () => {
+
+    console.log(favouritesArr)
+    try {
+      const initFavourites = [{ id: 0, city: 'Kraków' }, { id: 1, city: 'Warsaw' }, { id: 2, city: 'Gdańsk' }]
+      const initHistory = [{ id: 0, city: 'Frefeld' }, { id: 1, city: 'Wargla' }, { id: 2, city: 'Gdynia' }]
+      const db = await getDBConnection();
+      await createTables(db)
+      const storedFavourites = await getFavourites(db);
+      const storedHistory = await getHistory(db);
+
+      if (storedFavourites.length)
+        setFavourites(storedFavourites)
+      else {
+        await addFavourite(db, initFavourites)
+        setFavourites(initFavourites)
+      }
+
+      if (storedHistory.length)
+        setHisotry(storedHistory)
+      else {
+        await addHistory(db, initHistory)
+        setHisotry(initHistory)
+      }
+    } catch (err) {
+      return err
+    }
+
+  }, []);
+
+  useEffect(() => {
+    loadDataFromDb();
+  }, [loadDataFromDb]);
+}
