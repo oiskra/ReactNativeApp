@@ -37,13 +37,14 @@ const forcastWeatherStyles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: colors.columbiaBlue,
-      padding: 10
+      padding: 10,
     },
     hourlyforecastContainer: {
       flex: 1, 
       flexDirection: 'row',
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
+      paddingBottom: 30
     },
 
 });

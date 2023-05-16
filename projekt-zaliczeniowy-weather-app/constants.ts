@@ -10,4 +10,3 @@ export const colors = {
 };
 
 export const weatherApiKey = 'e90e0b5a70ccd873175190ae64d3431a';
-export const cityApiKey = '6D6Hla0Y0JWMqknMoDKX+w==Ln6sXyiwuRYxNFDe';

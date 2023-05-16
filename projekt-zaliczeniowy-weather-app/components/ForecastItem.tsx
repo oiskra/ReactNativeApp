@@ -8,13 +8,25 @@ interface IForecastItemProps {
     tempMin: number;
 }
 
+const dayOfWeek = [
+    'Sun',
+    'Mon',
+    'Tue',
+    'Wed',
+    'Thu',
+    'Fri',
+    'Sat'
+]
+
+
 
 export const ForecastItem : FC<IForecastItemProps> = ({date, icon, tempMax, tempMin}) => {
+    const dayOfWeekNum: number = new Date(date).getDay();
     const formatedDate: string = date.split(' ')[1].substring(0,5);
 
     return (
       <View style={forecastItemStyles.forecastItemContainer}>
-        <Text style={forecastItemStyles.forecastItemText}>{formatedDate}</Text>
+        <Text style={forecastItemStyles.forecastItemText}>{`${dayOfWeek[dayOfWeekNum]}, ${formatedDate}`}</Text>
         <Image 
           source={{uri: `https://openweathermap.org/img/wn/${icon}.png`}} 
           style={forecastItemStyles.forecastItemIcon}
