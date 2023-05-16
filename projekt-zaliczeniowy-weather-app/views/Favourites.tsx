@@ -40,10 +40,8 @@ export const Favourites : FC = () => {
 
         const db: SQLite.WebSQLDatabase = getDBConnection();
         createTables(db);
-        createFavourite(db, {city: 'Krakow'})
-        const cities = getFavourites(db);
-        console.log(cities)
-        setFavCities(cities);
+        createFavourite(db, {city: 'Berlin'})
+        getFavourites(db, setFavCities);
 
     }, [])
 

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import * as SQLite from 'expo-sqlite';
 
 export interface ISavedCity {
@@ -11,32 +10,30 @@ export const getDBConnection = (): SQLite.WebSQLDatabase => {
 };
 
 export const createTables = (db: SQLite.WebSQLDatabase): void => {
-
-  const tables = ['favourites', 'history'];
   db.transaction(tx => {
-    for (let tableName in tables) {
-        const query = `CREATE TABLE IF NOT EXISTS ${tableName}(id INTEGER PRIMARY KEY AUTOINCREMENT, city TEXT NOT NULL);`;
-        tx.executeSql(query);
-    }; 
+    const queryFav = `CREATE TABLE IF NOT EXISTS favourites (id INTEGER PRIMARY KEY AUTOINCREMENT, city TEXT NOT NULL);`;
+    const queryHis = `CREATE TABLE IF NOT EXISTS history (id INTEGER PRIMARY KEY AUTOINCREMENT, city TEXT NOT NULL);`;
+    tx.executeSql(queryFav);
+    tx.executeSql(queryHis);
   })
 };
 
-export const getFavourites = (db: SQLite.WebSQLDatabase): ISavedCity[] => {
-    let favourites: ISavedCity[] = [];
+export const getFavourites = (
+    db: SQLite.WebSQLDatabase, 
+    callback: (value: ISavedCity[]) => void): void => {
 
     db.transaction(tx => {
         tx.executeSql(
             'SELECT * FROM favourites',
             [],
             (tr, res) => {
-                console.log('get', res.rows._array);
-                favourites = res.rows._array;
+                //console.log('get', res.rows._array);
+                callback(res.rows._array);
             },
             (tr, err) => {console.log('get', err); return true;}
         );           
     });
 
-    return favourites;
 };
 
 export const createFavourite = (db: SQLite.WebSQLDatabase, favourite: ISavedCity): void => {
@@ -51,7 +48,7 @@ export const createFavourite = (db: SQLite.WebSQLDatabase, favourite: ISavedCity
 };
 
 
-export const delFavourite = async (db: SQLite.WebSQLDatabase, id: number): Promise<void> => {
+export const delFavourite = (db: SQLite.WebSQLDatabase, id: number): void => {
     db.transaction(tx => {
         tx.executeSql(
             `DELETE from favourites where id = ${id}`
