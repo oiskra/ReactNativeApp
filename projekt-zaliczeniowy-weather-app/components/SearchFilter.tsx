@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { StyleSheet, Platform, ScrollView, View, FlatList } from 'react-native';
 import { colors } from '../constants';
 import { ICities } from '../interfaces/ICities';
@@ -16,20 +16,30 @@ interface ISearchFilterProps {
 export const SearchFilter: FC<ISearchFilterProps> = ({ input, cities }) => {
     const [active, setActive] = useState(false);
 
+    useEffect(() => {
+        if(input == '') {setActive(false);}
+        else {setActive(true);}
+    }, [input])
+
     return (
-        <ScrollView
-            style={styles.flex}
-        >
-            {cities?.data.map((city) => {
-                if(input !== '' && city.city.toLocaleLowerCase().startsWith(input.toLocaleLowerCase())){
-                    return <ListItem key={city.city} listItemText={city.city} />
-                }else
-                    return
-            })}
+        <>
+            {active
+                &&
+                <View style={!active ? styles.none : styles.flex}>
+                    <ScrollView style={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
+                        {cities?.data.map((city) => {
+                            if (input !== '' && city.city.toLocaleLowerCase().startsWith(input.toLocaleLowerCase())) {
+                                return <ListItem key={city.city} listItemText={city.city} />
+                            }
+                            return
+                        })}
 
-        </ScrollView>
-
+                    </ScrollView>
+                </View>
+            }
+        </>
     );
+
 };
 
 const styles = StyleSheet.create({
@@ -40,13 +50,12 @@ const styles = StyleSheet.create({
 
     flex: {
         display: 'flex',
-        position: 'absolute',
-        width: '100%',
-        top: 50,
+        marginHorizontal: 10,
+        marginBottom: 10,
+        height: 115,
         borderWidth: 2,
         borderColor: colors.jordyBlue,
         borderRadius: 5,
-        backgroundColor: colors.white,
     },
 
 
