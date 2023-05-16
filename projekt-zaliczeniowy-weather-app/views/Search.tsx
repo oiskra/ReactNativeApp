@@ -31,7 +31,7 @@ export const Search: FC = () => {
 
     const onPress = () => console.log(`Search ${input}`);
 
-    const debounceOnChange = (value: any, delay = 1000) => {
+    const debounceOnChange = (value: any, delay = 500) => {
 
         const [debounceValue, setDebounceValue] = useState(value);
 
@@ -52,24 +52,21 @@ export const Search: FC = () => {
         <View style={styles.container}>
             <View style={styles.searchBar}>
                 <TextInput
-                    style={[styles.textInput, {fontFamily: 'DMSans'}]}
+                    style={styles.textInput}
                     value={input}
                     placeholder='Enter city...'
                     onChangeText={setInput}
                 />
-                <TouchableOpacity
-                    style={styles.touchableOpacity}
-                    onPress={onPress}
-                >
+                <TouchableOpacity onPress={onPress}>
                     <Image
                         style={styles.searchIcon}
                         source={require('../assets/search.png')}
                     />
                 </TouchableOpacity>
-                <SearchFilter input={debounceOnChange(input)} cities={data} active={false} />
             </View>
+            <SearchFilter input={debounceOnChange(input)} cities={data} active={false} />
 
-            <View style={styles.text}>
+            <View style={styles.historyContainer}>
                 <Text style={{fontFamily: 'DMSans'}}>Historia miast</Text>
             </View>
         </View>
@@ -82,43 +79,40 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.columbiaBlue,
-        alignItems: 'center',
+        // alignItems: 'center',
         justifyContent: 'center',
     },
 
     searchBar: {
-        width: '90%',
         margin: 10,
+        marginTop: 80,
         display: 'flex',
-        flexDirection: 'column',
-    },
-
-    textInput: {
-        width: '100%',
-        height: 40,
-        padding: 10,
+        flexDirection: 'row',
         borderWidth: 2,
         borderColor: colors.jordyBlue,
         borderRadius: 5,
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
 
-    touchableOpacity: {
-        position: 'absolute',
-        right: 15,
-        top: 13,
+    textInput: {
+        fontFamily: 'DMSans',
+        paddingLeft: 10,
+        flexGrow: 1,
+        height: 40,
     },
 
     searchIcon: {
+        marginRight: 10,
         width: 15,
         height: 15,
     },
 
 
-    text: {
+    historyContainer: {
         zIndex: -1,
-        width: '90%',
-        height: '70%',
-        margin: 10,
+        flexGrow: 1,
+        marginHorizontal: 10,
         padding: 15,
         borderWidth: 2,
         borderColor: colors.jordyBlue,
