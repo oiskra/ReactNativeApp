@@ -6,11 +6,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { colors } from './constants';
 import { Search } from './views/Search';
 import { useFonts } from 'expo-font';
+import { Favourites } from './views/Favourites';
 
 export type RootStackParamList = {
   Main: undefined;
   About: undefined;
   Search: undefined;
+  Settings: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -33,6 +35,8 @@ export default function App() {
     return null;
   }
 
+ 
+
   return (
       <NavigationContainer>
         <Stack.Navigator
@@ -53,10 +57,10 @@ export default function App() {
             name='About'
             component={About}
           />
-          {/* <Stack.Screen
+          <Stack.Screen
             name='Settings'
-            component={Settings}
-          /> */}
+            component={Favourites}
+          />
         </Stack.Navigator>
       </NavigationContainer>
   );
