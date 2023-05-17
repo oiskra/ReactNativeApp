@@ -13,7 +13,7 @@ type SearchProps = NativeStackScreenProps<RootStackParamList, 'Search'>
 export const Search: FC<SearchProps> = ({navigation}) => {
 
     const [input, setInput] = useState('');
-    const [selectedCity, setSelectedCity] = useState('Kraków');
+    const [selectedCity, setSelectedCity] = useState('');
     const [data, setData] = useState<ICities | undefined>(undefined);
     const [loading, setLoading] = useState(true);
 

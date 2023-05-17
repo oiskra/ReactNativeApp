@@ -4,13 +4,8 @@ import * as SQLite from "expo-sqlite";
 import { colors } from "../constants";
 import {
   ISavedCity,
-  createFavourite,
-  createHistory,
-  createTables,
-  dropTable,
   getDBConnection,
-  getFavourites,
-  getHistory,
+  getFavourites
 } from "../db-service";
 
 export const Favourites: FC = () => {
@@ -18,13 +13,7 @@ export const Favourites: FC = () => {
 
   useEffect(() => {
     const db: SQLite.WebSQLDatabase = getDBConnection();
-    createTables(db);
-    // createFavourite(db, {city: 'Berlin'})
     getFavourites(db, setFavCities);
-
-    // createHistory(db, {city: 'Berlin'})
-    // getHistory(db, setFavCities);
-    // dropTable(db, 'favourites');
   }, []);
 
   return (

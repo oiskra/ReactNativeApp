@@ -1,22 +1,52 @@
-import React, { FC, useState } from 'react'
-import { View, Text, Image, StyleSheet, Touchable, TouchableOpacity } from 'react-native'
+import React, { FC, useCallback, useEffect, useRef, useState } from 'react'
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import { colors } from '../constants';
+import { ISavedCity, createFavourite, deleteFavourite, getDBConnection, getFavourites } from '../db-service';
 
 interface ICurrentWeatherProps {
-    city?: string;
-    currentTemp?: string;
-    description?: string;
-    weatherIcon?: string;
+    city: string;
+    currentTemp: string;
+    description: string;
+    weatherIcon: string;
 }
-
-export const CurrentWeather : FC<ICurrentWeatherProps> = ({city, currentTemp, description, weatherIcon}) => {
+//{city, currentTemp, description, weatherIcon}
+export const CurrentWeather : FC<ICurrentWeatherProps> = (props) => {
     const [isFavourite, setIsFavourite] = useState<boolean>(false);
+    const [favCities, setFavCities] = useState<ISavedCity[]>([]);
+    
+    const favouriteButtonHandler = (): void => {
+        const db = getDBConnection();
+        if(isFavourite) {
+            setIsFavourite(false);
+            deleteFavourite(db, props.city);
+            return;
+        }
+        
+        setIsFavourite(true)
+        createFavourite(db, {city: props.city});
+        return;
+    }
 
+    useEffect(() => {
+        const db = getDBConnection();
+        getFavourites(db, setFavCities);
+    }, []);
+
+    useEffect(() => {
+        console.log('OHIO ONIICHAN', favCities);
+        const exists: boolean = favCities?.find(item => item.city === props.city) !== undefined;
+        setIsFavourite(exists);
+
+    }, [favCities])
+
+    
+
+    
     return (
         <View style={currentWeatherStyles.currentWeatherContainer}>
             <View style={currentWeatherStyles.currentWeatherHeader}>
-                <Text style={currentWeatherStyles.headerText}>{city}</Text>
-                <TouchableOpacity onPress={() => setIsFavourite(!isFavourite)}>
+                <Text style={currentWeatherStyles.headerText}>{props.city}</Text>
+                <TouchableOpacity onPress={favouriteButtonHandler}>
                     <Image 
                         source={!isFavourite ? require('../assets/heart-ol.png') : require('../assets/heart.png')} 
                         style={!isFavourite ? currentWeatherStyles.headerFavouriteImage : currentWeatherStyles.headerNonFavouriteImage} 
@@ -24,12 +54,12 @@ export const CurrentWeather : FC<ICurrentWeatherProps> = ({city, currentTemp, de
                 </TouchableOpacity>
             </View>
             <View style={currentWeatherStyles.tempContainer}>
-                <Text style={currentWeatherStyles.temperature}>{currentTemp}</Text>
-                <Text style={currentWeatherStyles.description}>{description?.toUpperCase()}</Text>
+                <Text style={currentWeatherStyles.temperature}>{props.currentTemp}</Text>
+                <Text style={currentWeatherStyles.description}>{props.description?.toUpperCase()}</Text>
             </View>
             <View style={{flex: 1, alignItems: 'center'}}>
                 <Image
-                    source={{uri: `https://openweathermap.org/img/wn/${weatherIcon}@4x.png`}}
+                    source={{uri: `https://openweathermap.org/img/wn/${props.weatherIcon}@4x.png`}}
                     resizeMethod='scale'
                     style={{
                         width: 250,
