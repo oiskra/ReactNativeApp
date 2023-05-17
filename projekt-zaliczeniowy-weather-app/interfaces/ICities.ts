@@ -1,4 +1,4 @@
-export interface Cities {
+export interface ICities {
     error: boolean;
     msg: string;
     data: [

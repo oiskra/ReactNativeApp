@@ -23,7 +23,7 @@ export const Favourites : FC = () => {
     }, [])
 
     return (
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.jordyBlue}}>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.columbiaBlue}}>
             <Text>Hello</Text>
             { favCities.map(item => <Text key={item.id}>{item.city}</Text>) }
         </View>

@@ -7,4 +7,6 @@ export const colors = {
     columbiaBlue: '#cfdee7ff',
     white: '#fff',
     black: '#000'
-}
+};
+
+export const weatherApiKey = 'e90e0b5a70ccd873175190ae64d3431a';
