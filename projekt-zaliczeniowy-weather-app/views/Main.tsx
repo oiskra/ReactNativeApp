@@ -22,9 +22,9 @@ export const Main : FC<MainProps> = ({ navigation }) => {
                     <Text style={mainStyles.mainHeader}>WeatherNow</Text>
                 </View>
                 <CustomButton title="Check Weather" onPress={() => navigation.push('Search')}/>
-                <CustomButton title="Favourites"/>
+                <CustomButton title="Favourites" onPress={() => navigation.push('Favourites')}/>
                 <CustomButton title="About" onPress={() => navigation.push('About')}/>
-                <CustomButton title="Settings" onPress={() => navigation.push('Settings')}/>
+                <CustomButton title="Settings"/>
             </View>
         </SafeAreaView>
     );

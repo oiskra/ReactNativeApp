@@ -12,7 +12,7 @@ export type RootStackParamList = {
   Main: undefined;
   About: undefined;
   Search: undefined;
-  Settings: undefined;
+  Favourites: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -35,7 +35,6 @@ export default function App() {
     return null;
   }
 
- 
 
   return (
       <NavigationContainer>
@@ -58,7 +57,7 @@ export default function App() {
             component={About}
           />
           <Stack.Screen
-            name='Settings'
+            name='Favourites'
             component={Favourites}
           />
         </Stack.Navigator>
