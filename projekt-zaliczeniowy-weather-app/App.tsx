@@ -8,6 +8,8 @@ import { WeatherInfo } from './views/WeatherInfo';
 import { Search } from './views/Search';
 import { useFonts } from 'expo-font';
 import { Favourites } from './views/Favourites';
+import { createTables, getDBConnection } from './db-service';
+import * as SQLite from 'expo-sqlite'
 
 export type RootStackParamList = {
   Main: undefined;
@@ -20,6 +22,9 @@ export type RootStackParamList = {
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
+const db: SQLite.WebSQLDatabase = getDBConnection();
+createTables(db);
+
 export default function App() {
 
   const [fontsLoaded] = useFonts({
@@ -28,16 +33,9 @@ export default function App() {
     'DMSans': require('./assets/fonts/DMSans-Regular.ttf'),
   });
 
-  // const onLayoutRootView = useCallback(async () => {
-  //   if (fontsLoaded) {
-  //     await SplashScreen.hideAsync();
-  //   }
-  // }, [fontsLoaded]);
-
   if (!fontsLoaded) {
     return null;
   }
-
 
   return (
       <NavigationContainer>
@@ -63,11 +61,11 @@ export default function App() {
             name='Favourites'
             component={Favourites}
           />
-          {/* <Stack.Screen 
+          {/* <Stack.Screen
             name='Settings'
             component={WeatherInfo}
           /> */}
-          <Stack.Screen 
+          <Stack.Screen
             name='WeatherInfo'
             component={WeatherInfo}
             />

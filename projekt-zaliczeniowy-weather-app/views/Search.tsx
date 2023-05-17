@@ -7,15 +7,19 @@ import { ListItem } from "../components/ListItem";
 import { SearchFilter } from "../components/SearchFilter";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
+import { ISavedCity, createHistory, dropTable, getDBConnection, getHistory } from "../db-service";
+import * as SQLite from 'expo-sqlite'
 
 type SearchProps = NativeStackScreenProps<RootStackParamList, 'Search'>
 
-export const Search: FC<SearchProps> = ({navigation}) => {
+export const Search: FC<SearchProps> = ({ navigation }) => {
 
     const [input, setInput] = useState('');
-    const [selectedCity, setSelectedCity] = useState('Kraków');
+    const [selectedCity, setSelectedCity] = useState('');
     const [data, setData] = useState<ICities | undefined>(undefined);
     const [loading, setLoading] = useState(true);
+
+    const [historyCities, sethistoryCities] = useState<ISavedCity[]>([]);
 
     useEffect(() => {
         fetch(`https://countriesnow.space/api/v0.1/countries/population/cities`)
@@ -29,15 +33,30 @@ export const Search: FC<SearchProps> = ({navigation}) => {
                     setLoading(false);
                 }
             )
+
+        const db: SQLite.WebSQLDatabase = getDBConnection();
+
+        getHistory(db, sethistoryCities);
+        // dropTable(db, 'history');
+
     }, []);
 
-    console.log(selectedCity);
-
-    const selectedCityHandler = (city: string) : void => {
+    const selectedCityHandler = (city: string): void => {
         setSelectedCity(city);
         setInput(city);
     }
-    const onSearchPress = () => navigation.push('WeatherInfo', {city: selectedCity})
+    const onSearchPress = () => {
+        if (input !== '') {
+            navigation.push('WeatherInfo', { city: selectedCity });
+
+            if(!historyCities.find(e => e.city === selectedCity)){
+                const db: SQLite.WebSQLDatabase = getDBConnection();
+                createHistory(db, { city: selectedCity });
+            }
+            setInput('');
+            setSelectedCity('');
+        }
+    }
 
     const debounceOnChange = (value: any, delay = 500) => {
 
@@ -72,15 +91,16 @@ export const Search: FC<SearchProps> = ({navigation}) => {
                     />
                 </TouchableOpacity>
             </View>
-            <SearchFilter 
-                input={debounceOnChange(input)} 
+            <SearchFilter
+                input={debounceOnChange(input)}
                 selectedCityHandler={selectedCityHandler}
-                cities={data} 
-                active={false} 
+                cities={data}
+                active={false}
             />
 
             <View style={styles.historyContainer}>
-                <Text style={{fontFamily: 'DMSans'}}>Historia miast</Text>
+                {/* TODO: po powrocie z weatherInfo nie odswieza sie i nie pokazuje historii */}
+                {historyCities.map(item => <ListItem key={item.city} listItemText={item.city} onListItemPress={() => selectedCityHandler(item.city)}/>)}
             </View>
         </View>
     );
@@ -126,7 +146,8 @@ const styles = StyleSheet.create({
         zIndex: -1,
         flexGrow: 1,
         marginHorizontal: 10,
-        padding: 15,
+        marginBottom: 10,
+        padding: 5,
         borderWidth: 2,
         borderColor: colors.jordyBlue,
         borderRadius: 5,

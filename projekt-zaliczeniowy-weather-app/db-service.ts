@@ -76,6 +76,8 @@ export const getHistory = (
 };
 
 export const createHistory = (db: SQLite.WebSQLDatabase, history: ISavedCity): void => {
+    if(history.city == '')
+        return
     db.transaction(tx => {
         tx.executeSql(
             `INSERT INTO history (city) values ("${history.city}")`,

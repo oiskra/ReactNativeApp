@@ -25,7 +25,7 @@ export const SearchFilter: FC<ISearchFilterProps> = ({ input, cities, selectedCi
     return (
         <>
             {
-            active 
+            active
             &&
             <View style={!active ? styles.none : styles.flex}>
                 <ScrollView style={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>

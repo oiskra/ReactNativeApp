@@ -2,7 +2,7 @@ import React, { FC, useCallback, useEffect, useState } from 'react'
 import { View, Text } from 'react-native'
 import * as SQLite from 'expo-sqlite'
 import { colors } from '../constants';
-import { ISavedCity, createFavourite, createHistory, createTables, dropTable, getDBConnection, getFavourites, getHistory } from '../db-service';
+import { ISavedCity, createFavourite, createTables, dropTable, getDBConnection, getFavourites } from '../db-service';
 
 
 
@@ -15,10 +15,6 @@ export const Favourites : FC = () => {
         createTables(db);
         // createFavourite(db, {city: 'Berlin'})
         getFavourites(db, setFavCities);
-
-        // createHistory(db, {city: 'Berlin'})
-        // getHistory(db, setFavCities);
-        // dropTable(db, 'favourites');
 
     }, [])
 
