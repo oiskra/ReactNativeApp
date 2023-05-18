@@ -38,7 +38,6 @@ export const Search: FC<SearchProps> = ({ navigation }) => {
             )
 
         const db: SQLite.WebSQLDatabase = getDBConnection();
-
         getHistory(db, sethistoryCities);
         // dropTable(db, 'history');
 
@@ -55,6 +54,7 @@ export const Search: FC<SearchProps> = ({ navigation }) => {
             if(!historyCities.find(e => e.city === selectedCity)){
                 const db: SQLite.WebSQLDatabase = getDBConnection();
                 createHistory(db, { city: selectedCity });
+                sethistoryCities([...historyCities, { city: selectedCity}]);
             }
             setInput('');
             setSelectedCity('');
@@ -102,7 +102,6 @@ export const Search: FC<SearchProps> = ({ navigation }) => {
             />
 
             <View style={styles.historyContainer}>
-                {/* TODO: po powrocie z weatherInfo nie odswieza sie i nie pokazuje historii */}
                 {historyCities.map(item => <ListItem key={item.city} listItemText={item.city} onListItemPress={() => selectedCityHandler(item.city)}/>)}
             </View>
         </View>
