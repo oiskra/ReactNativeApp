@@ -114,7 +114,7 @@ const searchStyles = StyleSheet.create({
     container: {
         paddingTop: (windowHeight * 0.12),
         flex: 1,
-        backgroundColor: colors.columbiaBlue,
+        backgroundColor: colors.background,
         justifyContent: 'center',
     },
 

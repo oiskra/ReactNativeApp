@@ -33,7 +33,6 @@ export const CurrentWeather : FC<ICurrentWeatherProps> = (props) => {
     }, []);
 
     useEffect(() => {
-        console.log('OHIO ONIICHAN', favCities);
         const exists: boolean = favCities?.find(item => item.city === props.city) !== undefined;
         setIsFavourite(exists);
 
@@ -77,7 +76,7 @@ const currentWeatherStyles = StyleSheet.create({
     currentWeatherContainer: {
         flex: 1,
         flexDirection: 'column',
-        backgroundColor: colors.columbiaBlue,
+        backgroundColor: colors.background,
         paddingTop: 100,
     },
     currentWeatherHeader: {

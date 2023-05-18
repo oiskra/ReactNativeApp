@@ -22,7 +22,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.jordyBlue,
     padding: 15,
     borderRadius: 5,
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   buttonText: {
     color: colors.white,

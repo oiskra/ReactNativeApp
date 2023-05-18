@@ -1,12 +1,11 @@
-type Theme = 'light' | 'dark';
-type Units = 'celcius' | 'fahrenheit';
 
-export class SettingsSingleton {
+type Units = 'metric' | 'imperial';
+
+export default class SettingsSingleton {
 
     private static instance: SettingsSingleton;
-
-    private _theme: Theme = 'light';
-    private _units: Units = 'celcius';
+    private _units: Units = 'metric';
+    private _isImperial: boolean = false;
 
     private constructor() {}
 
@@ -18,27 +17,19 @@ export class SettingsSingleton {
         return SettingsSingleton.instance;
     }
 
-    public get theme(): string {
-        return this._theme;
-    }
-
-    public get unit(): string {
+    public get units(): string {
         return this._units;
     }
 
-    public changeTheme() {
-
-        this._theme = this._theme === 'light' ? 'dark' : 'light';
-
-        console.log(this._theme);
-
+    public get isImperial(): boolean {
+        return this._isImperial;
     }
 
     public changeUnits() {
 
-        this._units = this._units === 'celcius' ? 'fahrenheit' : 'celcius';
-
-        console.log(this._units);
+        this._units = this._units === 'metric' ? 'imperial' : 'metric';
+        this._isImperial = !this._isImperial;
+        console.log('units changed', this._units);
 
     }
 
