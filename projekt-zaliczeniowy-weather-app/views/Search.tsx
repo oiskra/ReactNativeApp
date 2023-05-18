@@ -9,6 +9,9 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
 import { ISavedCity, createHistory, dropTable, getDBConnection, getHistory } from "../db-service";
 import * as SQLite from 'expo-sqlite'
+import {Dimensions} from 'react-native';
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 type SearchProps = NativeStackScreenProps<RootStackParamList, 'Search'>
 
@@ -106,19 +109,17 @@ export const Search: FC<SearchProps> = ({ navigation }) => {
     );
 }
 
-
 const styles = StyleSheet.create({
 
     container: {
+        paddingTop: windowHeight*0.11,
         flex: 1,
         backgroundColor: colors.columbiaBlue,
-        // alignItems: 'center',
         justifyContent: 'center',
     },
 
     searchBar: {
         margin: 10,
-        marginTop: 80,
         display: 'flex',
         flexDirection: 'row',
         borderWidth: 2,
