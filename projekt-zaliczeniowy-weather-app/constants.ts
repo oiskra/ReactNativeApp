@@ -1,10 +1,11 @@
+import SettingsSingleton from "./SettingsSingleton";
 
 export const colors = {
-    oxfordBlue: '#0b132bff',
     celticBlue: '#4472caff',
     glaucous: '#5e7ce2ff',
     jordyBlue: '#92b4f4ff',
-    columbiaBlue: '#cfdee7ff',
+    background: '#cfdee7ff',
+    oxfordBlue: '#0b132bff',
     white: '#fff',
     black: '#000'
 };

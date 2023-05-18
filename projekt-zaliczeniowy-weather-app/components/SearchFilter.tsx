@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: colors.jordyBlue,
         borderRadius: 5,
-        backgroundColor: colors.columbiaBlue,
+        backgroundColor: colors.background,
         elevation: 20,
         shadowColor: colors.oxfordBlue,
     },

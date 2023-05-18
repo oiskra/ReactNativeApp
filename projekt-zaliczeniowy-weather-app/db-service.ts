@@ -59,6 +59,17 @@ export const deleteFavourite = (db: SQLite.WebSQLDatabase, city: string): void =
     });
 };
 
+export const deleteAllFavourites = (db: SQLite.WebSQLDatabase): void => {
+    db.transaction(tx => {
+        tx.executeSql(
+            `DELETE from favourites`,
+            [],
+            (tr, res) => console.log('deleted all'),
+            (tr, err) => { console.log('delete all', err); return true; }
+
+        );
+    });
+};
 
 export const getHistory = (
     db: SQLite.WebSQLDatabase,
@@ -91,10 +102,21 @@ export const createHistory = (db: SQLite.WebSQLDatabase, history: ISavedCity): v
     });
 };
 
-export const delHistory = (db: SQLite.WebSQLDatabase, id: number): void => {
+export const deleteHistory = (db: SQLite.WebSQLDatabase, id: number): void => {
     db.transaction(tx => {
         tx.executeSql(
-            `DELETE from hisotry where id = ${id}`
+            `DELETE from history where id = ${id}`
+        );
+    });
+};
+
+export const deleteAllHistory = (db: SQLite.WebSQLDatabase): void => {
+    db.transaction(tx => {
+        tx.executeSql(
+            `DELETE from history`,
+            [],
+            (tr, res) => console.log('deleted all'),
+            (tr, err) => { console.log('delete all', err); return true; }
         );
     });
 };

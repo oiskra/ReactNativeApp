@@ -1,4 +1,3 @@
-import { StyleSheet } from 'react-native';
 import { Main } from './views/Main';
 import { About } from './views/About';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -82,9 +81,3 @@ export default function App() {
       </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  headerStyle: {
-    backgroundColor: colors.oxfordBlue,
-  }
-});

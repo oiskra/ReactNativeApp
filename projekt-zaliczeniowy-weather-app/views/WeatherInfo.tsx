@@ -7,6 +7,7 @@ import { ForecastWeather } from '../components/ForecastWeather'
 import { IHourlyWeather } from '../interfaces/IHourlyWeather'
 import { RootStackParamList } from '../App'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import SettingsSingleton from '../SettingsSingleton'
 
 type WeatherInfoProps = NativeStackScreenProps<RootStackParamList, 'WeatherInfo'>
 
@@ -16,11 +17,12 @@ export const WeatherInfo : FC<WeatherInfoProps> = ({route}) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const city = route.params.city;
+  const settings = SettingsSingleton.getInstance();
 
   useEffect(() => {
     Promise.all([
-      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${weatherApiKey}`),
-      fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${weatherApiKey}`)
+      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${settings.units}&appid=${weatherApiKey}`),
+      fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=${settings.units}&appid=${weatherApiKey}`)
     ])
     .then(([currentWeatherJson, hourlyWeatherJson]) => {
       return Promise.all([
@@ -38,7 +40,7 @@ export const WeatherInfo : FC<WeatherInfoProps> = ({route}) => {
   return (
     <SafeAreaView style={{flex:1}}>
       {isLoading ?
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.columbiaBlue}}>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.background}}>
           <ActivityIndicator
             size='large'
             color={colors.glaucous}
@@ -48,8 +50,8 @@ export const WeatherInfo : FC<WeatherInfoProps> = ({route}) => {
         <>
           <CurrentWeather
             city={currentWeatherData!.name}
-            currentTemp={currentWeatherData!.main.temp.toFixed(0) + '°'}
-            description={currentWeatherData!.weather[0].description}
+            currentTemp={`${currentWeatherData!.main.temp.toFixed(0)}°${settings.units === 'metric' ? 'C' : 'F'}`}
+            description={currentWeatherData!.weather[0].main}
             weatherIcon={currentWeatherData!.weather[0].icon}
           />
           <ForecastWeather

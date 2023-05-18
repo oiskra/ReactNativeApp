@@ -1,9 +1,10 @@
-import { FC } from "react";
+import { FC, useContext, useEffect } from "react";
 import { View, Text, Image, StyleSheet, SafeAreaView } from "react-native";
 import { colors } from "../constants";
 import { CustomButton } from "../components/CustomButton";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
+import SettingsSingleton from "../SettingsSingleton";
 
 
 type MainProps = NativeStackScreenProps<RootStackParamList, 'Main'>
@@ -12,7 +13,7 @@ export const Main : FC<MainProps> = ({ navigation }) => {
 
     return (
         <SafeAreaView style={{flex:1}}>
-            <View style={mainStyles.mainContainer}>
+            <View style={[mainStyles.mainContainer]}>
                 <View style={{
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -37,7 +38,7 @@ const mainStyles = StyleSheet.create({
         justifyContent: 'center',
         gap: 15,
         paddingHorizontal:20,
-        backgroundColor: colors.columbiaBlue,
+        backgroundColor: colors.background
     },
     mainHeader: {
         textAlign: 'center',
