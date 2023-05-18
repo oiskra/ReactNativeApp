@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useEffect, useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import * as SQLite from "expo-sqlite";
 import { colors } from "../constants";
 import {
@@ -7,8 +7,13 @@ import {
   getDBConnection,
   getFavourites
 } from "../db-service";
+import { CustomButton } from "../components/CustomButton";
+import { RootStackParamList } from "../App";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-export const Favourites: FC = () => {
+type FavouriteProps = NativeStackScreenProps<RootStackParamList, 'Favourites'>
+
+export const Favourites: FC<FavouriteProps> = ({navigation}) => {
   const [favCities, setFavCities] = useState<ISavedCity[]>([]);
 
   useEffect(() => {
@@ -21,14 +26,35 @@ export const Favourites: FC = () => {
       style={{
         flex: 1,
         justifyContent: "center",
-        alignItems: "center",
+        gap: 10,
         backgroundColor: colors.columbiaBlue,
       }}
     >
-      <Text>Hello</Text>
       {favCities.map((item) => (
-        <Text key={item.id}>{item.city}</Text>
+        <CustomButton 
+          title={item.city}
+          buttonStyle={favouritesStyles.favouriteItem}
+          textStyle={favouritesStyles.favouriteItemText}
+          onPress={() => navigation.push('WeatherInfo', {city: item.city})}  
+        /> 
       ))}
     </View>
   );
 };
+
+const favouritesStyles = StyleSheet.create({
+  favouriteItem: {
+    //flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.jordyBlue,
+    marginHorizontal: 10,
+    borderRadius: 10,
+    height: 50
+  },
+  favouriteItemText: {
+    fontFamily: 'DMSansBold',
+    fontSize: 16,
+    color: colors.white
+  }
+}); 

@@ -1,7 +1,7 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { Main } from './views/Main';
 import { About } from './views/About';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NativeStackNavigationOptions, createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { colors } from './constants';
 import { WeatherInfo } from './views/WeatherInfo';
@@ -55,6 +55,7 @@ export default function App() {
           <Stack.Screen
             name="Main"
             component={Main}
+            options={{headerShown: false}}
           />
           <Stack.Screen
             name='Search'
