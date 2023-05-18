@@ -1,12 +1,12 @@
 type Theme = 'light' | 'dark';
-type Unit = 'celcius' | 'fahrenheit';
+type Units = 'celcius' | 'fahrenheit';
 
-class SettingsSingleton {
+export class SettingsSingleton {
 
     private static instance: SettingsSingleton;
 
     private _theme: Theme = 'light';
-    private _unit: Unit = 'celcius';
+    private _units: Units = 'celcius';
 
     private constructor() {}
 
@@ -23,18 +23,22 @@ class SettingsSingleton {
     }
 
     public get unit(): string {
-        return this._unit;
+        return this._units;
     }
 
     public changeTheme() {
 
         this._theme = this._theme === 'light' ? 'dark' : 'light';
 
+        console.log(this._theme);
+
     }
 
-    public changeUnit() {
+    public changeUnits() {
 
-        this._unit = this._unit === 'celcius' ? 'fahrenheit' : 'celcius';
+        this._units = this._units === 'celcius' ? 'fahrenheit' : 'celcius';
+
+        console.log(this._units);
 
     }
 

@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { colors } from './constants';
 import { WeatherInfo } from './views/WeatherInfo';
 import { Search } from './views/Search';
+import { Settings } from './views/Settings';
 import { useFonts } from 'expo-font';
 import { Favourites } from './views/Favourites';
 import { createTables, getDBConnection } from './db-service';
@@ -69,10 +70,10 @@ export default function App() {
             name='Favourites'
             component={Favourites}
           />
-          {/* <Stack.Screen
+          <Stack.Screen
             name='Settings'
             component={Settings}
-          /> */}
+          />
           <Stack.Screen
             name='WeatherInfo'
             component={WeatherInfo}
