@@ -1,4 +1,3 @@
-import { StyleSheet } from 'react-native';
 import { Main } from './views/Main';
 import { About } from './views/About';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -6,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { colors } from './constants';
 import { WeatherInfo } from './views/WeatherInfo';
 import { Search } from './views/Search';
+import { Settings } from './views/Settings';
 import { useFonts } from 'expo-font';
 import { Favourites } from './views/Favourites';
 import { createTables, getDBConnection } from './db-service';
@@ -69,10 +69,10 @@ export default function App() {
             name='Favourites'
             component={Favourites}
           />
-          {/* <Stack.Screen
+          <Stack.Screen
             name='Settings'
             component={Settings}
-          /> */}
+          />
           <Stack.Screen
             name='WeatherInfo'
             component={WeatherInfo}
@@ -81,9 +81,3 @@ export default function App() {
       </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  headerStyle: {
-    backgroundColor: colors.oxfordBlue,
-  }
-});

@@ -33,7 +33,6 @@ export const CurrentWeather : FC<ICurrentWeatherProps> = (props) => {
     }, []);
 
     useEffect(() => {
-        console.log('OHIO ONIICHAN', favCities);
         const exists: boolean = favCities?.find(item => item.city === props.city) !== undefined;
         setIsFavourite(exists);
 

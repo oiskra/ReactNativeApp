@@ -32,6 +32,7 @@ export const Favourites: FC<FavouriteProps> = ({navigation}) => {
     >
       {favCities.map((item) => (
         <CustomButton 
+          key={item.id}
           title={item.city}
           buttonStyle={favouritesStyles.favouriteItem}
           textStyle={favouritesStyles.favouriteItemText}

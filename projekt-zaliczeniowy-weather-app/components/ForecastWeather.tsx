@@ -36,7 +36,7 @@ const forcastWeatherStyles = StyleSheet.create({
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: colors.columbiaBlue,
+      backgroundColor: colors.background,
       padding: 10,
     },
     hourlyforecastContainer: {
