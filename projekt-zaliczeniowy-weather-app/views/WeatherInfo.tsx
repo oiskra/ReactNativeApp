@@ -7,6 +7,7 @@ import { ForecastWeather } from '../components/ForecastWeather'
 import { IHourlyWeather } from '../interfaces/IHourlyWeather'
 import { RootStackParamList } from '../App'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { ISavedCity, getDBConnection, getFavourites } from '../db-service'
 
 type WeatherInfoProps = NativeStackScreenProps<RootStackParamList, 'WeatherInfo'>
 
@@ -15,7 +16,7 @@ export const WeatherInfo : FC<WeatherInfoProps> = ({route}) => {
   const [hourlyWeatherData, setHourlyWeatherData] = useState<IHourlyWeather | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const city = route.params.city
+  const city = route.params.city;
   
   useEffect(() => {
     Promise.all([
@@ -47,10 +48,10 @@ export const WeatherInfo : FC<WeatherInfoProps> = ({route}) => {
         :
         <>
           <CurrentWeather 
-            city={currentWeatherData?.name} 
-            currentTemp={currentWeatherData?.main.temp.toFixed(0) + '°'} 
-            description={currentWeatherData?.weather[0].description}
-            weatherIcon={currentWeatherData?.weather[0].icon}
+            city={currentWeatherData!.name} 
+            currentTemp={currentWeatherData!.main.temp.toFixed(0) + '°'} 
+            description={currentWeatherData!.weather[0].description}
+            weatherIcon={currentWeatherData!.weather[0].icon}
           />
           <ForecastWeather 
             forecast={hourlyWeatherData?.list}

@@ -7,22 +7,22 @@ import { ListItem } from "../components/ListItem";
 import { SearchFilter } from "../components/SearchFilter";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
-import { ISavedCity, createHistory, dropTable, getDBConnection, getHistory } from "../db-service";
+import { ISavedCity, createHistory, getDBConnection, getHistory } from "../db-service";
 import * as SQLite from 'expo-sqlite'
 import {Dimensions} from 'react-native';
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
+
 
 type SearchProps = NativeStackScreenProps<RootStackParamList, 'Search'>
+const windowHeight = Dimensions.get('window').height;
 
 export const Search: FC<SearchProps> = ({ navigation }) => {
-
+    
     const [input, setInput] = useState('');
     const [selectedCity, setSelectedCity] = useState('');
     const [data, setData] = useState<ICities | undefined>(undefined);
     const [loading, setLoading] = useState(true);
-
     const [historyCities, sethistoryCities] = useState<ISavedCity[]>([]);
+    
 
     useEffect(() => {
         fetch(`https://countriesnow.space/api/v0.1/countries/population/cities`)
@@ -39,7 +39,6 @@ export const Search: FC<SearchProps> = ({ navigation }) => {
 
         const db: SQLite.WebSQLDatabase = getDBConnection();
         getHistory(db, sethistoryCities);
-        // dropTable(db, 'history');
 
     }, []);
 
@@ -111,7 +110,7 @@ export const Search: FC<SearchProps> = ({ navigation }) => {
 const styles = StyleSheet.create({
 
     container: {
-        paddingTop: windowHeight*0.11,
+        paddingTop: (windowHeight * 0.11),
         flex: 1,
         backgroundColor: colors.columbiaBlue,
         justifyContent: 'center',

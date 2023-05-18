@@ -27,13 +27,12 @@ export const getFavourites = (
             'SELECT * FROM favourites',
             [],
             (tr, res) => {
-                //console.log('get', res.rows._array);
+                console.log('get', res.rows._array);
                 callback(res.rows._array);
             },
             (tr, err) => { console.log('get', err); return true; }
         );
     });
-
 };
 
 export const createFavourite = (db: SQLite.WebSQLDatabase, favourite: ISavedCity): void => {
@@ -48,10 +47,14 @@ export const createFavourite = (db: SQLite.WebSQLDatabase, favourite: ISavedCity
 };
 
 
-export const delFavourite = (db: SQLite.WebSQLDatabase, id: number): void => {
+export const deleteFavourite = (db: SQLite.WebSQLDatabase, city: string): void => {
     db.transaction(tx => {
         tx.executeSql(
-            `DELETE from favourites where id = ${id}`
+            `DELETE from favourites where city LIKE "${city}"`,
+            [],
+            (tr, res) => console.log('deleted'),
+            (tr, err) => { console.log('delete', err); return true; }
+
         );
     });
 };

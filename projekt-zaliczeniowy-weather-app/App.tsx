@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Main } from './views/Main';
 import { About } from './views/About';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -9,7 +9,8 @@ import { Search } from './views/Search';
 import { useFonts } from 'expo-font';
 import { Favourites } from './views/Favourites';
 import { createTables, getDBConnection } from './db-service';
-import * as SQLite from 'expo-sqlite'
+import { useCallback } from 'react';
+import SplashScreen from 'react-native-splash-screen';
 
 export type RootStackParamList = {
   Main: undefined;
@@ -22,9 +23,6 @@ export type RootStackParamList = {
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-const db: SQLite.WebSQLDatabase = getDBConnection();
-createTables(db);
-
 export default function App() {
 
   const [fontsLoaded] = useFonts({
@@ -33,9 +31,18 @@ export default function App() {
     'DMSans': require('./assets/fonts/DMSans-Regular.ttf'),
   });
 
+  const onLayoutRootView = useCallback(() => {
+    if (fontsLoaded) {
+      SplashScreen.hide();
+    }
+  }, [fontsLoaded]);
+
   if (!fontsLoaded) {
     return null;
   }
+  
+  const db = getDBConnection();
+  createTables(db);
 
   return (
       <NavigationContainer>
@@ -48,6 +55,7 @@ export default function App() {
           <Stack.Screen
             name="Main"
             component={Main}
+            options={{headerShown: false}}
           />
           <Stack.Screen
             name='Search'
@@ -63,7 +71,7 @@ export default function App() {
           />
           {/* <Stack.Screen
             name='Settings'
-            component={WeatherInfo}
+            component={Settings}
           /> */}
           <Stack.Screen
             name='WeatherInfo'
