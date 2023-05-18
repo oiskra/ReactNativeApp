@@ -1,7 +1,7 @@
 type Theme = 'light' | 'dark';
 type Unit = 'celcius' | 'fahrenheit';
 
-class SettingsSingleton {
+export default class SettingsSingleton {
 
     private static instance: SettingsSingleton;
 
@@ -27,15 +27,11 @@ class SettingsSingleton {
     }
 
     public changeTheme() {
-
         this._theme = this._theme === 'light' ? 'dark' : 'light';
-
     }
 
     public changeUnit() {
-
         this._unit = this._unit === 'celcius' ? 'fahrenheit' : 'celcius';
-
     }
 
 }

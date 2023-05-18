@@ -27,7 +27,7 @@ export const Favourites: FC<FavouriteProps> = ({navigation}) => {
         flex: 1,
         justifyContent: "center",
         gap: 10,
-        backgroundColor: colors.columbiaBlue,
+        backgroundColor: colors.background,
       }}
     >
       {favCities.map((item) => (

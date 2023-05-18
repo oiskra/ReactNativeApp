@@ -77,7 +77,7 @@ const currentWeatherStyles = StyleSheet.create({
     currentWeatherContainer: {
         flex: 1,
         flexDirection: 'column',
-        backgroundColor: colors.columbiaBlue,
+        backgroundColor: colors.background,
         paddingTop: 100,
     },
     currentWeatherHeader: {

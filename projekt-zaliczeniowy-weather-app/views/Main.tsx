@@ -37,7 +37,7 @@ const mainStyles = StyleSheet.create({
         justifyContent: 'center',
         gap: 15,
         paddingHorizontal:20,
-        backgroundColor: colors.columbiaBlue,
+        backgroundColor: colors.background,
     },
     mainHeader: {
         textAlign: 'center',

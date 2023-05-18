@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     container: {
         paddingTop: (windowHeight * 0.11),
         flex: 1,
-        backgroundColor: colors.columbiaBlue,
+        backgroundColor: colors.background,
         justifyContent: 'center',
     },
 
