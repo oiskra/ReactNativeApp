@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { StyleSheet, Platform, ScrollView, View, FlatList } from 'react-native';
+import { StyleSheet, ScrollView, View } from 'react-native';
 import { colors } from '../constants';
 import { ICities } from '../interfaces/ICities';
 import { ListItem } from './ListItem';
@@ -58,8 +58,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         display: 'flex',
         marginHorizontal: 10,
-        // marginBottom: 10,
-        height: 80,
+        height: 85,
         borderWidth: 2,
         borderColor: colors.jordyBlue,
         borderRadius: 5,

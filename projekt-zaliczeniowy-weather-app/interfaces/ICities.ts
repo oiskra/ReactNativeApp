@@ -13,7 +13,6 @@ export interface ICities {
                     rehability: string;
                 }
             >
-            
         }
     ]
 }

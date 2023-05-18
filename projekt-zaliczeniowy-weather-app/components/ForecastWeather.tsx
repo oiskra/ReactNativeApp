@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { View, StyleSheet, Text, Image, ScrollView } from 'react-native'
+import { View, StyleSheet, ScrollView } from 'react-native'
 import { colors } from '../constants';
 import { List } from '../interfaces/IHourlyWeather';
 import { ForecastItem } from './ForecastItem';
@@ -12,7 +12,7 @@ export const ForecastWeather : FC<IForecastWeatherProps> = ({forecast}) => {
   return (
     <View style={forcastWeatherStyles.forcastWeatherContainer}>
       <View style={forcastWeatherStyles.hourlyforecastContainer}>
-        <ScrollView 
+        <ScrollView
           style={{flex:1}}
           contentContainerStyle={{justifyContent: 'center', alignItems: 'center'}}
           showsVerticalScrollIndicator={false}
@@ -40,7 +40,7 @@ const forcastWeatherStyles = StyleSheet.create({
       padding: 10,
     },
     hourlyforecastContainer: {
-      flex: 1, 
+      flex: 1,
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',

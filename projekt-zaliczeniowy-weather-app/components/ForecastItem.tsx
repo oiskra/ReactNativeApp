@@ -27,7 +27,7 @@ export const ForecastItem : FC<IForecastItemProps> = ({date, icon, tempMax, temp
     return (
       <View style={forecastItemStyles.forecastItemContainer}>
         <Text style={forecastItemStyles.forecastItemText}>{`${dayOfWeek[dayOfWeekNum]}, ${formatedDate}`}</Text>
-        <Image 
+        <Image
           source={{uri: `https://openweathermap.org/img/wn/${icon}.png`}} 
           style={forecastItemStyles.forecastItemIcon}
         />
@@ -53,4 +53,3 @@ const forecastItemStyles = StyleSheet.create({
         fontFamily: 'DMSans'
       }
 })
-  

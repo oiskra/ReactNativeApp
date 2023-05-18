@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import * as SQLite from "expo-sqlite";
 import { colors } from "../constants";
@@ -31,12 +31,12 @@ export const Favourites: FC<FavouriteProps> = ({navigation}) => {
       }}
     >
       {favCities.map((item) => (
-        <CustomButton 
+        <CustomButton
           title={item.city}
           buttonStyle={favouritesStyles.favouriteItem}
           textStyle={favouritesStyles.favouriteItemText}
-          onPress={() => navigation.push('WeatherInfo', {city: item.city})}  
-        /> 
+          onPress={() => navigation.push('WeatherInfo', {city: item.city})}
+        />
       ))}
     </View>
   );
@@ -57,4 +57,4 @@ const favouritesStyles = StyleSheet.create({
     fontSize: 16,
     color: colors.white
   }
-}); 
+});

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { TouchableOpacity, Text, StyleSheet, TouchableOpacityProps, StyleProp, ViewStyle } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { colors } from '../constants';
 
 interface ICustomButtonProps {

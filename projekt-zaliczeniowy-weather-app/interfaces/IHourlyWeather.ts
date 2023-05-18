@@ -4,7 +4,7 @@ export interface IHourlyWeather {
     cnt: number;
     list: List[];
   }
-  
+
 export interface List {
     dt: number;
     main: {
@@ -38,4 +38,3 @@ export interface Weather {
     description: string;
     icon: string;
 }
-  

@@ -30,11 +30,10 @@ export interface ICurrentWeather {
     name: string;
     cod: number;
 }
-  
+
 interface IWeather {
     id: number;
     main: string;
     description: string;
     icon: string;
 }
-  

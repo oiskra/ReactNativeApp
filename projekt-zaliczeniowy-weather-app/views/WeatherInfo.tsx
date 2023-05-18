@@ -1,13 +1,12 @@
 import React, { FC, useEffect, useState } from 'react'
 import { CurrentWeather } from '../components/CurrentWeather'
-import { ActivityIndicator, SafeAreaView, Text, View } from 'react-native'
+import { ActivityIndicator, SafeAreaView, View } from 'react-native'
 import { colors, weatherApiKey } from '../constants'
 import { ICurrentWeather } from '../interfaces/ICurrentWeather'
 import { ForecastWeather } from '../components/ForecastWeather'
 import { IHourlyWeather } from '../interfaces/IHourlyWeather'
 import { RootStackParamList } from '../App'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { ISavedCity, getDBConnection, getFavourites } from '../db-service'
 
 type WeatherInfoProps = NativeStackScreenProps<RootStackParamList, 'WeatherInfo'>
 
@@ -17,7 +16,7 @@ export const WeatherInfo : FC<WeatherInfoProps> = ({route}) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const city = route.params.city;
-  
+
   useEffect(() => {
     Promise.all([
       fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${weatherApiKey}`),
@@ -47,13 +46,13 @@ export const WeatherInfo : FC<WeatherInfoProps> = ({route}) => {
         </View>
         :
         <>
-          <CurrentWeather 
-            city={currentWeatherData!.name} 
-            currentTemp={currentWeatherData!.main.temp.toFixed(0) + '°'} 
+          <CurrentWeather
+            city={currentWeatherData!.name}
+            currentTemp={currentWeatherData!.main.temp.toFixed(0) + '°'}
             description={currentWeatherData!.weather[0].description}
             weatherIcon={currentWeatherData!.weather[0].icon}
           />
-          <ForecastWeather 
+          <ForecastWeather
             forecast={hourlyWeatherData?.list}
           />
         </>

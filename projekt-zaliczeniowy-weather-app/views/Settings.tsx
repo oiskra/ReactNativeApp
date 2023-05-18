@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import { View, Text, StyleSheet, Switch } from "react-native";
 import { colors } from "../constants";
 import { RootStackParamList } from "../App";

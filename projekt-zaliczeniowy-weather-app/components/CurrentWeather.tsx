@@ -9,11 +9,11 @@ interface ICurrentWeatherProps {
     description: string;
     weatherIcon: string;
 }
-//{city, currentTemp, description, weatherIcon}
+
 export const CurrentWeather : FC<ICurrentWeatherProps> = (props) => {
     const [isFavourite, setIsFavourite] = useState<boolean>(false);
     const [favCities, setFavCities] = useState<ISavedCity[]>([]);
-    
+
     const favouriteButtonHandler = (): void => {
         const db = getDBConnection();
         if(isFavourite) {
@@ -21,7 +21,7 @@ export const CurrentWeather : FC<ICurrentWeatherProps> = (props) => {
             deleteFavourite(db, props.city);
             return;
         }
-        
+
         setIsFavourite(true)
         createFavourite(db, {city: props.city});
         return;
@@ -39,17 +39,14 @@ export const CurrentWeather : FC<ICurrentWeatherProps> = (props) => {
 
     }, [favCities])
 
-    
-
-    
     return (
         <View style={currentWeatherStyles.currentWeatherContainer}>
             <View style={currentWeatherStyles.currentWeatherHeader}>
                 <Text style={currentWeatherStyles.headerText}>{props.city}</Text>
                 <TouchableOpacity onPress={favouriteButtonHandler}>
-                    <Image 
+                    <Image
                         source={!isFavourite ? require('../assets/heart-ol.png') : require('../assets/heart.png')} 
-                        style={!isFavourite ? currentWeatherStyles.headerFavouriteImage : currentWeatherStyles.headerNonFavouriteImage} 
+                        style={!isFavourite ? currentWeatherStyles.headerFavouriteImage : currentWeatherStyles.headerNonFavouriteImage}
                     />
                 </TouchableOpacity>
             </View>
@@ -90,7 +87,7 @@ const currentWeatherStyles = StyleSheet.create({
     },
     headerText: {
         fontSize: 40,
-        fontFamily: 'DMSans'   
+        fontFamily: 'DMSans'
     },
     headerFavouriteImage: {
         width: 35,
@@ -102,11 +99,11 @@ const currentWeatherStyles = StyleSheet.create({
     },
     temperature: {
         fontSize: 100,
-        fontFamily: 'DMSans'   
+        fontFamily: 'DMSans'
     },
     description: {
         fontSize: 20,
-        fontFamily: 'DMSans'   
+        fontFamily: 'DMSans'
     },
     tempContainer: {
         flex: 1,

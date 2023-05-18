@@ -7,7 +7,7 @@ import { ListItem } from "../components/ListItem";
 import { SearchFilter } from "../components/SearchFilter";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
-import { ISavedCity, createHistory, dropTable, getDBConnection, getHistory } from "../db-service";
+import { ISavedCity, createHistory, getDBConnection, getHistory } from "../db-service";
 import * as SQLite from 'expo-sqlite'
 import { Dimensions } from 'react-native';
 
@@ -39,7 +39,6 @@ export const Search: FC<SearchProps> = ({ navigation }) => {
 
         const db: SQLite.WebSQLDatabase = getDBConnection();
         getHistory(db, sethistoryCities);
-        dropTable(db, 'history');
 
     }, []);
 
@@ -156,9 +155,6 @@ const searchStyles = StyleSheet.create({
         marginHorizontal: 10,
         marginBottom: 10,
         padding: 5,
-        // borderWidth: 2,
-        // borderColor: colors.jordyBlue,
-        // borderRadius: 5,
         color: colors.white,
         fontFamily: 'DMSans',
         alignItems: 'center',
