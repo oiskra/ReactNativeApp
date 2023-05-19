@@ -59,6 +59,8 @@ const settingsStyles = StyleSheet.create({
     },
     settingItem: {
         display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         width: '60%',
         backgroundColor: colors.jordyBlue,
         margin: 10,
