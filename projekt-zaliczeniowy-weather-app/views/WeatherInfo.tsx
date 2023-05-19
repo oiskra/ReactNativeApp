@@ -11,7 +11,7 @@ import SettingsSingleton from '../SettingsSingleton'
 
 type WeatherInfoProps = NativeStackScreenProps<RootStackParamList, 'WeatherInfo'>
 
-export const WeatherInfo : FC<WeatherInfoProps> = ({route}) => {
+export const WeatherInfo : FC<WeatherInfoProps> = ({navigation, route}) => {
   const [currentWeatherData, setCurrentWeatherData] = useState<ICurrentWeather | undefined>(undefined);
   const [hourlyWeatherData, setHourlyWeatherData] = useState<IHourlyWeather | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(true);

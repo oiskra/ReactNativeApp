@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import * as SQLite from "expo-sqlite";
 import { colors } from "../constants";
 import {
@@ -15,11 +15,12 @@ type FavouriteProps = NativeStackScreenProps<RootStackParamList, 'Favourites'>
 
 export const Favourites: FC<FavouriteProps> = ({navigation}) => {
   const [favCities, setFavCities] = useState<ISavedCity[]>([]);
+  const [isFocused, setIsFocused] = useState<boolean>(true);
+  const db: SQLite.WebSQLDatabase = getDBConnection();
+  
+  navigation.addListener('focus', () => setIsFocused(true));
 
-  useEffect(() => {
-    const db: SQLite.WebSQLDatabase = getDBConnection();
-    getFavourites(db, setFavCities);
-  }, []);
+  useEffect(() => getFavourites(db, setFavCities), [isFocused]);
 
   return (
     <View
@@ -36,7 +37,10 @@ export const Favourites: FC<FavouriteProps> = ({navigation}) => {
           title={item.city}
           buttonStyle={favouritesStyles.favouriteItem}
           textStyle={favouritesStyles.favouriteItemText}
-          onPress={() => navigation.push('WeatherInfo', {city: item.city})}
+          onPress={() => {
+            navigation.push('WeatherInfo', {city: item.city});
+            setIsFocused(false);
+          }}
         />
       ))}
     </View>
@@ -45,7 +49,6 @@ export const Favourites: FC<FavouriteProps> = ({navigation}) => {
 
 const favouritesStyles = StyleSheet.create({
   favouriteItem: {
-    //flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.jordyBlue,

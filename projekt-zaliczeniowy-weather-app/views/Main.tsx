@@ -22,7 +22,7 @@ export const Main : FC<MainProps> = ({ navigation }) => {
                     <Image style={mainStyles.img}  source={require("../assets/umbrella.png")}></Image>
                     <Text style={mainStyles.mainHeader}>WeatherNow</Text>
                 </View>
-                <CustomButton title="Check Weather" onPress={() => navigation.push('Search')}/>
+                <CustomButton title="Search Weather" onPress={() => navigation.push('Search')}/>
                 <CustomButton title="Favourites" onPress={() => navigation.push('Favourites')}/>
                 <CustomButton title="About" onPress={() => navigation.push('About')}/>
                 <CustomButton title="Settings"  onPress={() => navigation.push('Settings')}/>
