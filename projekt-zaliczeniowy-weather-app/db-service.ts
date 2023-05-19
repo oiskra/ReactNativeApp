@@ -77,7 +77,7 @@ export const getHistory = (
 
     db.transaction(tx => {
         tx.executeSql(
-            'SELECT * FROM history',
+            'SELECT * FROM history ORDER BY id desc',
             [],
             (tr, res) => {
                 console.log('get', res.rows._array);
@@ -98,6 +98,19 @@ export const createHistory = (db: SQLite.WebSQLDatabase, history: ISavedCity): v
             [],
             (tr, res) => console.log('created'),
             (tr, err) => { console.log('create', err); return true; }
+        );
+
+        tx.executeSql(
+            'SELECT * FROM history',
+            [],
+            (tr, res) => {
+                const historyArr: ISavedCity[] = res.rows._array
+                if(historyArr.length > 10) {
+                    const lowestId: number = Math.min(...historyArr.map(item => item.id!))
+                    deleteHistory(db, lowestId)
+                }
+            },
+            (tr, err) => { console.log('get', err); return true; }
         );
     });
 };

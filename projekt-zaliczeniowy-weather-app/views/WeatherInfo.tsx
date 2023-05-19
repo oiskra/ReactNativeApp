@@ -40,10 +40,7 @@ export const WeatherInfo : FC<WeatherInfoProps> = ({ navigation, route }) => {
       setHourlyWeatherData(hourlyWeather);
       setIsLoading(false);
     })
-    .catch((err : Error) => {
-      console.log(err); 
-      navigation.push('Error', {errorMsg: err.message});
-    })
+    .catch((err: Error) => navigation.push('Error', {errorMsg: err.message}))
   }, []);
 
   return (

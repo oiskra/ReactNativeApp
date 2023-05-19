@@ -27,15 +27,7 @@ export const Search: FC<SearchProps> = ({ navigation }) => {
     useEffect(() => {
         fetch(`https://countriesnow.space/api/v0.1/countries/population/cities`)
             .then(res => res.json())
-            .then(
-                (result) => {
-                    setLoading(false);
-                    setData(result);
-                },
-                (error) => {
-                    setLoading(false);
-                }
-            )
+            .then((result) => setData(result))
 
         const db: SQLite.WebSQLDatabase = getDBConnection();
         getHistory(db, sethistoryCities);
@@ -46,6 +38,7 @@ export const Search: FC<SearchProps> = ({ navigation }) => {
         setSelectedCity(city);
         setInput(city);
     }
+    
     const onSearchPress = () => {
         if (input !== '') {
             navigation.push('WeatherInfo', { city: selectedCity });
@@ -53,7 +46,7 @@ export const Search: FC<SearchProps> = ({ navigation }) => {
             if (!historyCities.find(e => e.city === selectedCity)) {
                 const db: SQLite.WebSQLDatabase = getDBConnection();
                 createHistory(db, { city: selectedCity });
-                sethistoryCities([...historyCities, { city: selectedCity }]);
+                sethistoryCities([{ city: selectedCity }, ...historyCities ]);
             }
             setInput('');
             setSelectedCity('');
@@ -102,7 +95,16 @@ export const Search: FC<SearchProps> = ({ navigation }) => {
 
             <View style={searchStyles.historyContainer}>
                 <Text style={{ margin: 10, fontSize: 18, fontFamily: 'DMSansBold', borderBottomColor: colors.black, borderBottomWidth: 1, paddingBottom: 5, width: '100%' }}>Search history</Text>
-                {historyCities.map(item => <ListItem addictionalStyles={searchStyles.listItemStyle} key={item.city} listItemText={item.city} onListItemPress={() => selectedCityHandler(item.city)} />)}
+                {historyCities
+                    .map(item => 
+                        <ListItem 
+                            addictionalStyles={searchStyles.listItemStyle} 
+                            key={item.city} 
+                            listItemText={item.city} 
+                            onListItemPress={() => selectedCityHandler(item.city)} 
+                        />)
+                    
+                }
             </View>
         </KeyboardAvoidingView>
     );
