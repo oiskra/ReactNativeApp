@@ -11,7 +11,7 @@ import SettingsSingleton from '../SettingsSingleton'
 
 type WeatherInfoProps = NativeStackScreenProps<RootStackParamList, 'WeatherInfo'>
 
-export const WeatherInfo : FC<WeatherInfoProps> = ({navigation, route}) => {
+export const WeatherInfo : FC<WeatherInfoProps> = ({ navigation, route }) => {
   const [currentWeatherData, setCurrentWeatherData] = useState<ICurrentWeather | undefined>(undefined);
   const [hourlyWeatherData, setHourlyWeatherData] = useState<IHourlyWeather | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -31,9 +31,18 @@ export const WeatherInfo : FC<WeatherInfoProps> = ({navigation, route}) => {
       ])
     })
     .then(([currentWeather, hourlyWeather]) => {
+      
+      console.log(currentWeather.cod)
+      if(currentWeather.cod !== 200) {
+        throw Error("City's forecast is unavailable.")
+      }
       setCurrentWeatherData(currentWeather);
       setHourlyWeatherData(hourlyWeather);
       setIsLoading(false);
+    })
+    .catch((err : Error) => {
+      console.log(err); 
+      navigation.push('Error', {errorMsg: err.message});
     })
   }, []);
 

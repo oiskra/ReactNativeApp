@@ -1,8 +1,8 @@
 import { Main } from './views/Main';
 import { About } from './views/About';
+import { Error } from './views/Error';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-import { colors } from './constants';
 import { WeatherInfo } from './views/WeatherInfo';
 import { Search } from './views/Search';
 import { Settings } from './views/Settings';
@@ -19,6 +19,7 @@ export type RootStackParamList = {
   Search: undefined;
   Favourites: undefined;
   WeatherInfo: {city: string};
+  Error: {errorMsg: string};
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -76,7 +77,11 @@ export default function App() {
           <Stack.Screen
             name='WeatherInfo'
             component={WeatherInfo}
-            />
+          />
+          <Stack.Screen 
+            name='Error'
+            component={Error}
+          />
         </Stack.Navigator>
       </NavigationContainer>
   );

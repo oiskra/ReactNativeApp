@@ -4,7 +4,6 @@ import { colors } from "../constants";
 import { CustomButton } from "../components/CustomButton";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
-import SettingsSingleton from "../SettingsSingleton";
 
 
 type MainProps = NativeStackScreenProps<RootStackParamList, 'Main'>
