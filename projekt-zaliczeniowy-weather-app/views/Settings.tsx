@@ -27,6 +27,7 @@ export const Settings: FC<SettingsProps> = () => {
                 <View style={settingsStyles.switch}>
                     <Text style={settingsStyles.swtichText}>Celcius</Text>
                     <Switch
+                        testID="units-switch"
                         onChange={onUnitsChange}
                         value={isUnitsSwitchEnable}
                     />
