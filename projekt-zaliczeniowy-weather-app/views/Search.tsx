@@ -11,7 +11,6 @@ import {
 import { colors } from "../constants";
 import { ICities } from "../interfaces/ICities";
 import { ListItem } from "../components/ListItem";
-import { SearchFilter } from "../components/SearchFilter";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
 import {
