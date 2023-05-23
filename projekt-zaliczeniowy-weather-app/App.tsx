@@ -81,6 +81,9 @@ export default function App() {
           <Stack.Screen 
             name='Error'
             component={Error}
+            options={{
+              headerBackVisible: false
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>

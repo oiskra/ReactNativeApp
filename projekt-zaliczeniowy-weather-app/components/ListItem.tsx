@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native';
 import { FC } from 'react';
 import React from 'react';
 import { colors } from '../constants';
@@ -12,9 +12,9 @@ interface IListItemProps {
 export const ListItem : FC<IListItemProps> = ({addictionalStyles, listItemText, onListItemPress}) => {
 
     return (
-        <View style={[styles.listItem, addictionalStyles]}>
-            <Text style={{fontFamily: 'DMSans'}} onPress={() => onListItemPress()}>{listItemText}</Text>
-        </View>
+        <TouchableOpacity style={[styles.listItem, addictionalStyles]} onPress={() => onListItemPress()}>
+            <Text style={{fontFamily: 'DMSans'}}>{listItemText}</Text>
+        </TouchableOpacity>
     );
 }
 

@@ -13,8 +13,6 @@ interface ISearchFilterProps {
     selectedCityHandler: (city: string) => void
 }
 
-
-
 export const SearchFilter: FC<ISearchFilterProps> = ({ input, cities, selectedCityHandler }) => {
     const [active, setActive] = useState(false);
 
@@ -22,6 +20,23 @@ export const SearchFilter: FC<ISearchFilterProps> = ({ input, cities, selectedCi
         if (input == '') { setActive(false); }
         else { setActive(true); }
     }, [input])
+
+    const debounceOnChange = (value: any, delay = 500) => {
+
+        const [debounceValue, setDebounceValue] = useState(value);
+
+        useEffect(() => {
+            const handler = setTimeout(() => {
+                setDebounceValue(value);
+            }, delay);
+
+            return () => {
+                clearTimeout(handler);
+            };
+        }, [value, delay]);
+
+        return debounceValue
+    }
 
     return (
         <>

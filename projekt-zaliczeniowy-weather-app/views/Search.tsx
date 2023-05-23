@@ -1,6 +1,6 @@
 import { FC } from "react";
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, KeyboardAvoidingView } from 'react-native';
 import { colors } from '../constants';
 import { ICities } from '../interfaces/ICities';
 import { ListItem } from "../components/ListItem";
@@ -20,10 +20,9 @@ export const Search: FC<SearchProps> = ({ navigation }) => {
     const [input, setInput] = useState('');
     const [selectedCity, setSelectedCity] = useState('');
     const [data, setData] = useState<ICities | undefined>(undefined);
-    const [loading, setLoading] = useState(true);
     const [historyCities, sethistoryCities] = useState<ISavedCity[]>([]);
 
-
+    //on search filter click search weather (fetch) 
     useEffect(() => {
         fetch(`https://countriesnow.space/api/v0.1/countries/population/cities`)
             .then(res => res.json())
@@ -38,36 +37,24 @@ export const Search: FC<SearchProps> = ({ navigation }) => {
         setSelectedCity(city);
         setInput(city);
     }
-    
-    const onSearchPress = () => {
-        if (input !== '') {
-            navigation.push('WeatherInfo', { city: selectedCity });
 
-            if (!historyCities.find(e => e.city === selectedCity)) {
+    const onInputChange = (newInput: string) => {
+        setInput(newInput);
+    }
+    
+    const onSearchPress = (city: string) => {
+        if (input !== '') {
+            setInput(input.trim());
+            navigation.push('WeatherInfo', { city: city });
+
+            if (!historyCities.find(e => e.city === city)) {
                 const db: SQLite.WebSQLDatabase = getDBConnection();
-                createHistory(db, { city: selectedCity });
-                sethistoryCities([{ city: selectedCity }, ...historyCities ]);
+                createHistory(db, { city: city });
+                sethistoryCities([{ city: city }, ...historyCities ]);
             }
             setInput('');
             setSelectedCity('');
         }
-    }
-
-    const debounceOnChange = (value: any, delay = 500) => {
-
-        const [debounceValue, setDebounceValue] = useState(value);
-
-        useEffect(() => {
-            const handler = setTimeout(() => {
-                setDebounceValue(value);
-            }, delay);
-
-            return () => {
-                clearTimeout(handler);
-            };
-        }, [value, delay]);
-
-        return debounceValue
     }
 
     return (
@@ -77,18 +64,18 @@ export const Search: FC<SearchProps> = ({ navigation }) => {
                     style={searchStyles.textInput}
                     value={input}
                     placeholder='Enter city...'
-                    onChangeText={setInput}
+                    onChangeText={onInputChange}
                 />
-                <TouchableOpacity onPress={onSearchPress}>
+                {/* <TouchableOpacity onPress={onSearchPress}>
                     <Image
                         style={searchStyles.searchIcon}
                         source={require('../assets/search.png')}
                     />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </View>
             <SearchFilter
-                input={debounceOnChange(input)}
-                selectedCityHandler={selectedCityHandler}
+                input={input.trim()}
+                selectedCityHandler={() => onSearchPress(input)}
                 cities={data}
                 active={false}
             />
@@ -101,7 +88,7 @@ export const Search: FC<SearchProps> = ({ navigation }) => {
                             addictionalStyles={searchStyles.listItemStyle} 
                             key={item.city} 
                             listItemText={item.city} 
-                            onListItemPress={() => selectedCityHandler(item.city)} 
+                            onListItemPress={() => onSearchPress(item.city)} 
                         />)
                     
                 }
