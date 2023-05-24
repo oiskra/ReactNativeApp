@@ -1,5 +1,5 @@
 //@ts-nocheck
-import { render, fireEvent, waitFor } from "@testing-library/react-native";
+import { render } from "@testing-library/react-native";
 import { ForecastWeather } from "../../components/ForecastWeather";
 import { colors } from "../../constants";
 
@@ -48,7 +48,7 @@ describe("ListItem", () => {
         }
 
         const { forecast } = props;
-        const { getAllByTestId, getByTestId, debug } = render(<ForecastWeather forecast={forecast} />);
+        const { getAllByTestId, getByTestId } = render(<ForecastWeather forecast={forecast} />);
 
         expect(getAllByTestId('forecast-item-wrapper').length).toBe(1);
         expect(getByTestId('forecast-item-day').children).toContain('Wed, 21:00');

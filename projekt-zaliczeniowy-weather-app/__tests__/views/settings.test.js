@@ -1,11 +1,7 @@
 // @ts-nocheck
-
 import { Settings } from "../../views/Settings"
 import React from 'react';
-import {SwitchChangeEvent} from 'react-native'
-import { render, fireEvent } from '@testing-library/react-native';
-import { deleteAllFavourites, deleteAllHistory, getDBConnection } from '../../db-service';
-import {SettingsSingleton} from '../../SettingsSingleton'
+import { render } from '@testing-library/react-native';
 
 describe('settings', () => {
     it('render', () => {
@@ -23,9 +19,8 @@ describe('settings', () => {
 
     it('render units switch', () => {
 
-        const { getAllByRole, debug } = render(<Settings />);
+        const { getAllByRole } = render(<Settings />);
         const switchElement = getAllByRole('switch');
-        debug();
         expect(switchElement.length).toBe(1);
     });
 })
