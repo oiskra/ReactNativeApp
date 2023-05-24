@@ -3,7 +3,7 @@ import { render } from "@testing-library/react-native";
 import { ForecastWeather } from "../../components/ForecastWeather";
 import { colors } from "../../constants";
 
-describe("ListItem", () => {
+describe("ForecastWeather", () => {
 
     it('Component generate properly', () => {
 
