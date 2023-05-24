@@ -1,8 +1,9 @@
+// @ts-nocheck
+
 import { SettingsSingleton } from "../SettingsSingleton";
 
 describe("SettingSingleton", () => {
 
-    let settings: SettingsSingleton;
     beforeEach(() => {
         settings = SettingsSingleton.getInstance();
     });
