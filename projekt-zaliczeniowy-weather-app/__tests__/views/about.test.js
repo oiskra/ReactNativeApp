@@ -2,7 +2,7 @@ import { render, fireEvent } from "@testing-library/react-native";
 import { About } from "../../views/About";
 
 describe("About", () => {
-  it("Komponenty poprawnie sie renderuja", () => {
+  it("Components generete properly", () => {
     const { getByText } = render(<About />);
 
     expect(getByText("About")).toBeDefined();

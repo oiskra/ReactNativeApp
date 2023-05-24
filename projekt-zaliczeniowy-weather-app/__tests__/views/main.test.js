@@ -2,7 +2,7 @@ import { render, fireEvent } from "@testing-library/react-native";
 import { Main } from "../../views/Main";
 
 describe("Main", () => {
-  it("Komponenty poprawnie sie renderuja", () => {
+  it("Components render properly", () => {
     const navigate = { navigate: () => {}}
     const { getByText } = render(<Main navigation={navigate} />);
 
@@ -15,7 +15,7 @@ describe("Main", () => {
     expect(getByText("Settings")).toBeDefined();
   });
 
-  it("Po nacisniecie przycisku przenosi na odpowiedni widok", () => {
+  it("onClick", () => {
     const navigationMock = { push: jest.fn() };
 
     const { getByText } = render(<Main navigation={navigationMock} />);

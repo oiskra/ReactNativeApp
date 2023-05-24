@@ -10,9 +10,10 @@ interface IForecastWeatherProps {
 
 export const ForecastWeather : FC<IForecastWeatherProps> = ({forecast}) => {
   return (
-    <View style={forcastWeatherStyles.forcastWeatherContainer}>
+    <View testID='weather-forecast-wrapper' style={forcastWeatherStyles.forcastWeatherContainer}>
       <View style={forcastWeatherStyles.hourlyforecastContainer}>
         <ScrollView
+          testID='weather-forecast-scrollview'
           style={{flex:1}}
           contentContainerStyle={{justifyContent: 'center', alignItems: 'center'}}
           showsVerticalScrollIndicator={false}

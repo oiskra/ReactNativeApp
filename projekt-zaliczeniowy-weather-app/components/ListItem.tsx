@@ -3,7 +3,7 @@ import { FC } from 'react';
 import React from 'react';
 import { colors } from '../constants';
 
-interface IListItemProps {
+export interface IListItemProps {
     addictionalStyles: object;
     listItemText: string;
     onListItemPress: () => void;
@@ -12,8 +12,8 @@ interface IListItemProps {
 export const ListItem : FC<IListItemProps> = ({addictionalStyles, listItemText, onListItemPress}) => {
 
     return (
-        <TouchableOpacity style={[styles.listItem, addictionalStyles]} onPress={() => onListItemPress()}>
-            <Text style={{fontFamily: 'DMSans'}}>{listItemText}</Text>
+        <TouchableOpacity testID='list-item-wrapper' style={[styles.listItem, addictionalStyles]} onPress={() => onListItemPress()}>
+            <Text testID='list-item-text' style={{fontFamily: 'DMSans'}}>{listItemText}</Text>
         </TouchableOpacity>
     );
 }
