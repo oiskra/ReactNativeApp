@@ -1,11 +1,8 @@
-// @ts-nocheck
+//@ts-nocheck
 
-import { Settings } from "../../views/Settings"
 import React from 'react';
-import {SwitchChangeEvent} from 'react-native'
+import { Settings } from "../../views/Settings"
 import { render, fireEvent } from '@testing-library/react-native';
-import { deleteAllFavourites, deleteAllHistory, getDBConnection } from '../../db-service';
-import {SettingsSingleton} from '../../SettingsSingleton'
 
 describe('settings', () => {
     it('render', () => {
@@ -17,15 +14,16 @@ describe('settings', () => {
         expect(getAllByText('Fahrenheit').length).toBe(1);
         expect(getAllByText('Clear History').length).toBe(1);
         expect(getAllByText('Clear Favourites').length).toBe(1);
-
     })
 
 
-    it('render units switch', () => {
-
-        const { getAllByRole, debug } = render(<Settings />);
-        const switchElement = getAllByRole('switch');
-        debug();
-        expect(switchElement.length).toBe(1);
+    it('should have the correct initial value', () => {
+        const initialValue = false;
+        const { getByTestId } = render(<Settings />);
+    
+        const switchElement = getByTestId('units-switch');
+    
+        expect(switchElement.props.value).toBe(initialValue);
     });
+
 })

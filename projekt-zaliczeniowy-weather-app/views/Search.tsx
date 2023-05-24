@@ -33,7 +33,7 @@ export const Search: FC<SearchProps> = ({ navigation }) => {
   const [active, setActive] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const debouncedSearchTerm = useDebounce(searchTerm, 1000);
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
   useEffect(() => {
     if (debouncedSearchTerm) {
