@@ -7,7 +7,7 @@ import { ForecastWeather } from '../components/ForecastWeather'
 import { IHourlyWeather } from '../interfaces/IHourlyWeather'
 import { RootStackParamList } from '../App'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import SettingsSingleton from '../SettingsSingleton'
+import {SettingsSingleton} from '../SettingsSingleton'
 
 type WeatherInfoProps = NativeStackScreenProps<RootStackParamList, 'WeatherInfo'>
 
