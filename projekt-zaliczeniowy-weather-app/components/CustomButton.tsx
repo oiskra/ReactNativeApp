@@ -11,8 +11,8 @@ interface ICustomButtonProps {
 
 export const CustomButton: FC<ICustomButtonProps> = ({ onPress, title, buttonStyle, textStyle }) => {
   return (
-    <TouchableOpacity style={[buttonStyle ?? styles.button]} onPress={onPress}>
-      <Text style={[styles.buttonText, textStyle]}>{title}</Text>
+    <TouchableOpacity testID='custom-btn-wrapper' style={[buttonStyle ?? styles.button]} onPress={onPress}>
+      <Text testID='custom-btn-text' style={[styles.buttonText, textStyle]}>{title}</Text>
     </TouchableOpacity>
   );
 };

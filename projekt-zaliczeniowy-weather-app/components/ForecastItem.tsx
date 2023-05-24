@@ -25,13 +25,13 @@ export const ForecastItem : FC<IForecastItemProps> = ({date, icon, tempMax, temp
     const formatedDate: string = date.split(' ')[1].substring(0,5);
 
     return (
-      <View style={forecastItemStyles.forecastItemContainer}>
-        <Text style={forecastItemStyles.forecastItemText}>{`${dayOfWeek[dayOfWeekNum]}, ${formatedDate}`}</Text>
-        <Image
+      <View testID="forecast-item-wrapper" style={forecastItemStyles.forecastItemContainer}>
+        <Text testID="forecast-item-day" style={forecastItemStyles.forecastItemText}>{`${dayOfWeek[dayOfWeekNum]}, ${formatedDate}`}</Text>
+        <Image testID="forecast-item-icon"
           source={{uri: `https://openweathermap.org/img/wn/${icon}.png`}} 
           style={forecastItemStyles.forecastItemIcon}
         />
-        <Text style={forecastItemStyles.forecastItemText}>{`${tempMax.toFixed(0)}/${tempMin.toFixed(0)}`}</Text>
+        <Text testID="forecast-item-temp" style={forecastItemStyles.forecastItemText}>{`${tempMax.toFixed(0)}/${tempMin.toFixed(0)}`}</Text>
       </View>
     )
 }
