@@ -1,7 +1,7 @@
 
 type Units = 'metric' | 'imperial';
 
-export default class SettingsSingleton {
+export class SettingsSingleton {
 
     private static instance: SettingsSingleton;
     private _units: Units = 'metric';

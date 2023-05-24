@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Switch } from "react-native";
 import { colors } from "../constants";
 import { RootStackParamList } from "../App";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import  SettingsSingleton  from "../SettingsSingleton";
+import { SettingsSingleton } from "../SettingsSingleton";
 import { CustomButton } from "../components/CustomButton";
 import { deleteAllFavourites, deleteAllHistory, getDBConnection } from "../db-service";
 
@@ -34,18 +34,18 @@ export const Settings: FC<SettingsProps> = () => {
                     <Text style={settingsStyles.swtichText}>Fahrenheit</Text>
                 </View>
             </View>
-            <CustomButton 
-                title="Clear History" 
+            <CustomButton
+                title="Clear History"
                 buttonStyle={settingsStyles.settingItem}
-                textStyle={{color: colors.black,fontSize: 18}}
+                textStyle={{ color: colors.black, fontSize: 18 }}
                 onPress={() => deleteAllHistory(db)}
-            /> 
-            <CustomButton 
-                title="Clear Favourites" 
+            />
+            <CustomButton
+                title="Clear Favourites"
                 buttonStyle={settingsStyles.settingItem}
-                textStyle={{color: colors.black,fontSize: 18}}
+                textStyle={{ color: colors.black, fontSize: 18 }}
                 onPress={() => deleteAllFavourites(db)}
-            /> 
+            />
         </View>
     );
 };

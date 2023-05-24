@@ -1,8 +1,7 @@
-//@ts-nocheck
-
-import React from 'react';
+// @ts-nocheck
 import { Settings } from "../../views/Settings"
-import { render, fireEvent } from '@testing-library/react-native';
+import React from 'react';
+import { render } from '@testing-library/react-native';
 
 describe('settings', () => {
     it('render', () => {
