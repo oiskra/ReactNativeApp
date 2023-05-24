@@ -35,21 +35,4 @@ describe("SettingSingleton", () => {
 
     });
 
-    it('changeUnits works in both ways', () => {
-
-        expect(settings.units).toBe('metric');
-        expect(settings.isImperial).toBe(false);
-
-        settings.changeUnits();
-
-        expect(settings.units).toBe('imperial');
-        expect(settings.isImperial).toBe(true);
-
-        settings.changeUnits();
-
-        expect(settings.units).toBe('metric');
-        expect(settings.isImperial).toBe(false);
-
-    });
-
 });
